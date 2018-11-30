@@ -15,17 +15,17 @@ export default class App extends Component {
         {/* <View style={{ alignItems: 'center' }}>
           <Text style={{ fontWeight: 'bold', fontSize: 19, height: 50, }}>搜索</Text>
         </View> */}
-        <View style={{ flexDirection: 'row',marginTop:8, alignItems: 'center',backgroundColor:'white', marginLeft: 10, borderRadius: 8, height: 38, width: width - 20, borderColor: 'gray', borderWidth: 1, }}>
+        <View style={{ flexDirection: 'row',marginTop:8, alignItems: 'center',backgroundColor:'white', marginLeft: 10, borderRadius: 8, height: 40, width: width - 20, borderColor: 'gray', borderWidth: 1, }}>
           <Image style={{ width: 20, height: 20, marginLeft: 8 }}
             source={require("../images/nav_but_icon_.png")}></Image>
           <TextInput
             placeholder='请输入搜索内容'
-            style={{ height: 38, width: width - 70 }}
+            style={{ height: 40, width: '100%',lineHeight:40}}
           ></TextInput>
         </View>
         <View style={{backgroundColor:'white',paddingBottom:30,marginTop:8}}>        
         <View style={{ marginTop: 10, marginLeft: 10 }}>
-          <Text style={{ fontSize: 16, fontWeight: 'Blod', }}>热门搜索</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold', }}>热门搜索</Text>
         </View>
         <View style={{ flexWrap: 'wrap', width: width - 20, marginLeft: 10, flexDirection: 'row' }}>
           <TouchableOpacity>

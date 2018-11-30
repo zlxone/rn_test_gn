@@ -232,52 +232,53 @@ export default class App extends Component {
                 </View>
                 <ScrollView stickyHeaderIndices={[1]}>
 
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Personal')}>
 
-                        <View style={{ backgroundColor: 'white', marginTop: 6, padding: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Image style={{ width: 70, height: 70, marginRight: 8 }} source={require('../images/tx.png')}></Image>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 18 }}>叫我小小小圆子</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', width: 124, marginTop: 4 }}>
-                                        <Text style={{ marginRight: 24 }}>学生</Text>
-                                        <Text>20岁</Text>
-                                    </View>
+                    <View style={{ backgroundColor: 'white', marginTop: 6, padding: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image style={{ width: 70, height: 70, marginRight: 8, borderRadius: 35 }} source={require('../images/tx.png')}></Image>
+                            <View style={{ alignItems: 'center' }}>
+                                <Text style={{ fontSize: 18 }}>叫我小小小圆子</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', width: 124, marginTop: 4 }}>
+                                    <Text style={{ marginRight: 24 }}>学生</Text>
+                                    <Text>20岁</Text>
                                 </View>
                             </View>
-                            <Image source={require('../images/ljt.png')}></Image>
-
                         </View>
-                    </TouchableOpacity>
-
-                    <View style={{ backgroundColor: 'white', marginTop: 10, paddingTop: 16, }}>
-                        <Text style={{ fontSize: 18, color: '#222224', paddingLeft: 16, paddingRight: 16, marginBottom: 10 }}>我的兼职</Text>
-                        <View style={{ flexDirection: 'row', height: 30, justifyContent: 'space-around' }}>
-                            <Text style={this.state.all}
-                                onPress={() => this.setState({ chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })}
-                            >全部</Text>
-                            <Text style={this.state.ybm}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })}
-                            >已报名</Text>
-                            <Text style={this.state.ywc}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })}
-                            >已完成</Text>
-                            <Text style={this.state.ypj}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })}
-                            >已评价</Text>
-                            <Text style={this.state.yjj}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })}
-                            >已拒绝</Text>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Personal')}>
+                        <Image source={require('../images/ljt.png')}></Image>
+                            </TouchableOpacity>
                         </View>
+
+
+                <View style={{ backgroundColor: 'white', marginTop: 10, paddingTop: 16, }}>
+                    <Text style={{ fontSize: 18, color: '#222224', paddingLeft: 16, paddingRight: 16, marginBottom: 10 }}>我的兼职</Text>
+                    <View style={{ flexDirection: 'row', height: 30, justifyContent: 'space-around' }}>
+                        <Text style={this.state.all}
+                            onPress={() => this.setState({ chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })}
+                        >全部</Text>
+                        <Text style={this.state.ybm}
+                            onPress={() => this.setState({ chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })}
+                        >已报名</Text>
+                        <Text style={this.state.ywc}
+                            onPress={() => this.setState({ chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })}
+                        >已完成</Text>
+                        <Text style={this.state.ypj}
+                            onPress={() => this.setState({ chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })}
+                        >已评价</Text>
+                        <Text style={this.state.yjj}
+                            onPress={() => this.setState({ chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })}
+                        >已拒绝</Text>
                     </View>
-                    {show}
-                    {showybm}
-                    {showywc}
-                    {showypj}
-                    {showyjj}
+                </View>
+                {show}
+                {showybm}
+                {showywc}
+                {showypj}
+                {showyjj}
                 </ScrollView>
-            </View>
+            </View >
         );
     }
 }

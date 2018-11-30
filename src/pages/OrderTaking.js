@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#EAEAEA',
-    paddingTop: 10,
+    // paddingTop: 10,
   },
   jdcell: {
     height: 142,

@@ -41,6 +41,9 @@ const itemHeight = 0; //高度不需要自定义 这里不作处理
  * 类：侧边筛选功能modal
  */
 export default class HomePage extends Component {
+  static navigationOptions = {
+    title: '兼职大厅',
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -373,30 +376,31 @@ export default class HomePage extends Component {
         </View>
         <ScrollView >
 
-          <View style={{ flexDirection: 'row', paddingLeft: 15, paddingRight: 15, marginTop: 8, alignItems: 'center', justifyContent: 'space-between' }}>
+          <View style={{ flexDirection: 'row', paddingLeft: 15, paddingRight: 15,height:40, alignItems: 'center', justifyContent: 'space-between' }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
+              <View style={{ flexDirection: 'row', marginTop:7,alignItems: 'center', backgroundColor: 'white', borderRadius: 8, height: 40, width: width - 70, borderColor: 'gray', borderWidth: 1, }}>
+                <Image style={{ width: 20, height: 20, }}
+                  source={require("../images/nav_but_icon_.png")}></Image>
+                <TextInput
+                  placeholder='请输入想搜索的兼职'
+                  editable={false}
+                  style={{ height: 40, width: width - 70, lineHeight: 40 }}
+                ></TextInput>
+              </View>
+            </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', borderRadius: 8, height: 38, width: width - 70, borderColor: 'gray', borderWidth: 1, }}>
-              <Image style={{ width: 20, height: 20, marginLeft: 8 }}
-                source={require("../images/nav_but_icon_.png")}></Image>
-              <TextInput
-                placeholder='请输入想搜索的兼职'
-                onFocus={() => this.props.navigation.navigate('Search')}
-                style={{ height: 38, width: width - 70 }}
-              ></TextInput>
-            </View>
-
-            <TouchableOpacity onPress = {() => {this.setState({ showModal : true })}}>
+            <TouchableOpacity onPress={() => { this.setState({ showModal: true }) }}>
               <Image
-                style={{ width: 28, height: 28 }}
+                style={{ width: 28, height: 28,marginTop:7 }}
                 source={require('../images/nav_but_icon_n.png')}>
               </Image>
             </TouchableOpacity>
-
           </View>
 
-          <View style={{ height: 180 }}>
+          {/* <View style={{ height: 160,}}> */}
             <Swiper
-              height={180}
+            // style={{backgroundColor:'red'}}
+              height={142}
               horizontal={true}
               paginationStyle={{ bottom: 10 }}
               showsButtons={false}>
@@ -404,19 +408,22 @@ export default class HomePage extends Component {
               <Image source={require('../images/lbt0.png')} style={styles.img} />
               <Image source={require('../images/lbt0.png')} style={styles.img} />
             </Swiper>
-          </View>
+          {/* </View> */}
 
           <View >
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('OrderTaking')}
+            <View              
               style={{ height: 41, width: width, padding: 6, backgroundColor: '#F5F5F5', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 6 }}>
                 <Image style={{ width: 10, height: 10 }} source={require('../images/del_icon1.png')}></Image>
                 <Text style={{ fontSize: 14, marginLeft: 4, marginRight: 4 }}>接单大厅</Text>
                 <Image style={{ width: 10, height: 10 }} source={require('../images/del_icon2.png')}></Image>
               </View>
-              <Image style={{ width: 20, height: 20 }} source={require('../images/icon_more_n.png')}></Image>
-            </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('OrderTaking')}>
+                <Image style={{ width: 20, height: 20 }} source={require('../images/icon_more_n.png')}></Image>
+              </TouchableOpacity>
+
+            </View>
           </View>
 
 
@@ -470,56 +477,60 @@ export default class HomePage extends Component {
             </View>
           </View>
         </ScrollView>
+
+        <ScrollView>
         <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={this.state.showModal}
-                    onRequestClose={() => this.setState({ showModal : false })}
-                >
-                    <View style = {{backgroundColor : 'rgba(0,0,0,.6)',flex : 1,flexDirection : 'row'}}>
-                        <TouchableOpacity style = {{backgroundColor : 'transparent'}} activeOpacity={1} onPress = {() => { this.setState({ showModal : false }) }}>
-                            <View style = {{ width : shadowWidth,height : '100%',backgroundColor : 'transparent', }} />
-                        </TouchableOpacity>
-                        <View style = {{flex : 1,backgroundColor : '#FFFFFF'}}>
-                            {/* title */}
-                            <View style = {{
-                                width : '100%',height : 45,marginTop : 44,justifyContent : 'center',alignItems : 'center',
-                            }}>
-                                <Text style = {{fontSize : 18,color : '#000000'}}>{'筛选'}</Text>
-                            </View>
+          animationType="slide"
+          transparent={true}
+          visible={this.state.showModal}
+          onRequestClose={() => this.setState({ showModal: false })}
+        >
+          <View style={{ backgroundColor: 'rgba(0,0,0,.6)', flex: 1, flexDirection: 'row' }}>
+            <TouchableOpacity style={{ backgroundColor: 'transparent' }} activeOpacity={1} onPress={() => { this.setState({ showModal: false }) }}>
+              <View style={{ width: shadowWidth, height: '100%', backgroundColor: 'transparent', }} />
+            </TouchableOpacity>
+            <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+              {/* title */}
+              <View style={{
+                width: '100%', height: 45, marginTop: 44, justifyContent: 'center', alignItems: 'center',
+              }}>
+                <Text style={{ fontSize: 18, color: '#000000' }}>{'筛选'}</Text>
+              </View>
 
-                            { this.itemTitleListView() }
+              {this.itemTitleListView()}
 
-                            <View style = {{flex : 1,alignItems : 'flex-end',justifyContent : 'center'}}>
-                                <View style = {{flexDirection : 'row',marginRight : 25}}>
-                                    <TouchableOpacity onPress = {() => {
-                                        this.clear();
-                                    }}>
-                                    <View style = {{
-                                        width : 75,height : 40,backgroundColor : '#B92324',justifyContent : 'center',alignItems : 'center',
-                                        borderTopLeftRadius : 20,borderBottomLeftRadius : 20,
-                                    }}>
-                                        <Text style = {{fontSize : 15,color : '#000000'}}>{'重置'}</Text>
-                                    </View>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity onPress = {() => {
-                                        this.save();
-                                    }}>
-                                    <View style = {{
-                                        width : 75,height : 40,backgroundColor : '#000000',justifyContent : 'center',alignItems : 'center',
-                                        borderTopRightRadius : 20,borderBottomRightRadius : 20,
-                                    }}>
-                                        <Text style = {{fontSize : 15,color : '#B92324'}}>{'确定'}</Text>
-                                    </View>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
+              <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
+                <View style={{ flexDirection: 'row', marginRight: 25 }}>
+                  <TouchableOpacity onPress={() => {
+                    this.clear();
+                  }}>
+                    <View style={{
+                      width: 75, height: 40, backgroundColor: '#B92424', justifyContent: 'center', alignItems: 'center',
+                      borderTopLeftRadius: 20, borderBottomLeftRadius: 20,
+                    }}>
+                      <Text style={{ fontSize: 15, color: '#000000' }}>{'重置'}</Text>
                     </View>
-                </Modal>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={() => {
+                    this.save();
+                  }}>
+                    <View style={{
+                      width: 75, height: 40, backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center',
+                      borderTopRightRadius: 20, borderBottomRightRadius: 20,
+                    }}>
+                      <Text style={{ fontSize: 15, color: '#B92324' }}>{'确定'}</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
+          
+        </Modal>
+        </ScrollView>
       </View>
-      
+
 
     );
   }
@@ -535,7 +546,7 @@ const styles = StyleSheet.create({
   img: {
     resizeMode: 'contain',
     width: width,
-    height: 200,
+    height: 148,
   },
   jdcell: {
     height: 142,

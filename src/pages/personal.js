@@ -16,7 +16,7 @@ export default class App extends Component {
                         头像
             </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image style={{ width: 60, height: 60, marginRight: 8 }} source={require('../images/tx.png')}></Image>
+                        <Image style={{ width: 60, height: 60, marginRight: 8,borderRadius:30 }} source={require('../images/tx.png')}></Image>
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>

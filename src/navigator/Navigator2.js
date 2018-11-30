@@ -73,9 +73,9 @@ const RootStack = createStackNavigator({
             },
             headerTintColor: '#000000',
             headerTitleStyle: {
-              fontWeight: 'bold',
+            //   fontWeight: 'bold',
               textAlign:'center',
-              width:'78%',
+              width:'72%',
               fontSize:20,
             },
             headerBackImage: <BackImg/>  
