@@ -12,11 +12,10 @@ export default class App extends Component {
             <View style={styles.container}>
                 <View style={{ backgroundColor:'white',height: 100, paddingLeft: 16, backgroundColor: 'white', marginTop: 6, }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomColor: '#EAEAEA', borderBottomWidth: 1 }}>
-                        <TextInput placeholder='请输入新的手机号码' keyboardType='numeric' style={{ width: width * 0.66, }}></TextInput>
-                        <TouchableOpacity style={{paddingRight:16}}>
-                            <Text style={{ color: '#B92424', fontSize: 18,  }}>获取验证码</Text>
+                        <TextInput placeholder='请输入新的手机号码' keyboardType='numeric' style={{ flex:1, }}></TextInput>
+                        <TouchableOpacity style={{ marginRight:16,marginLeft:16}}>
+                            <Text style={{ color: '#B92424', fontSize: 18, width:'100%', }}>获取验证码</Text>
                         </TouchableOpacity>
-
                     </View>
 
                     <TextInput placeholder='请输入验证码' style={{ width: width * 0.9, }}></TextInput>

@@ -36,6 +36,8 @@ const itemMargin = 12;
 const itemNumColumns = 3;
 const itemWidth = ((width - shadowWidth) - (itemNumColumns + 1) * itemMargin) / itemNumColumns;
 const itemHeight = 0; //高度不需要自定义 这里不作处理
+const orderImage = Image.resolveAssetSource(require('../images/lbt0.png'));
+const imgH = orderImage.height/(orderImage.width/width)
 //const shadowWidth
 /**
  * 类：侧边筛选功能modal
@@ -228,7 +230,7 @@ export default class HomePage extends Component {
             width: itemWidth, paddingVertical: 6, backgroundColor: '#F7F8F7', borderWidth: 1, borderColor: item.isSelect ? '#B92324' : '#B8B9BD',
             justifyContent: 'center', alignItems: 'center',
           }}>
-            <Text style={{ fontSize: 14, color: item.isSelect ? '#B92324' : '#000000' }}>{item.name}</Text>
+            <Text style={{ fontSize: 12, color: item.isSelect ? '#B92324' : '#000000' }}>{item.name}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -372,13 +374,13 @@ export default class HomePage extends Component {
           barStyle={'dark-content'}
         />
         <View style={{ alignItems: 'center', width: width, height: 64, backgroundColor: 'white' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 19, height: 64, lineHeight: 64, }}>光年达意人力资源</Text>
+          <Text style={{  fontSize: 19, height: 64, lineHeight: 64,color:'black' }}>光年达意人力资源</Text>
         </View>
         <ScrollView >
 
-          <View style={{ flexDirection: 'row', paddingLeft: 15, paddingRight: 15,height:40, alignItems: 'center', justifyContent: 'space-between' }}>
+          <View style={{ flexDirection: 'row', paddingLeft: 15, paddingRight: 15, height: 40, alignItems: 'center', justifyContent: 'space-between' }}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
-              <View style={{ flexDirection: 'row', marginTop:7,alignItems: 'center', backgroundColor: 'white', borderRadius: 8, height: 40, width: width - 70, borderColor: 'gray', borderWidth: 1, }}>
+              <View style={{ flexDirection: 'row', paddingLeft: 8, marginTop: 8, alignItems: 'center', backgroundColor: 'white', borderRadius: 8, height: 40, width: width - 70, borderColor: 'gray', borderWidth: 1, }}>
                 <Image style={{ width: 20, height: 20, }}
                   source={require("../images/nav_but_icon_.png")}></Image>
                 <TextInput
@@ -391,27 +393,29 @@ export default class HomePage extends Component {
 
             <TouchableOpacity onPress={() => { this.setState({ showModal: true }) }}>
               <Image
-                style={{ width: 28, height: 28,marginTop:7 }}
+                style={{ width: 28, height: 28, marginTop: 7 }}
                 source={require('../images/nav_but_icon_n.png')}>
               </Image>
             </TouchableOpacity>
           </View>
 
-          {/* <View style={{ height: 160,}}> */}
+          <View style={{ marginTop: 8 }}>
             <Swiper
-            // style={{backgroundColor:'red'}}
-              height={142}
+              style={{backgroundColor:'white',marginBottom:1}}
+              height={imgH}
+              autoplay={true}
               horizontal={true}
+              showsPagination={false}
               paginationStyle={{ bottom: 10 }}
               showsButtons={false}>
               <Image source={require('../images/lbt0.png')} style={styles.img} />
               <Image source={require('../images/lbt0.png')} style={styles.img} />
               <Image source={require('../images/lbt0.png')} style={styles.img} />
             </Swiper>
-          {/* </View> */}
+          </View>
 
           <View >
-            <View              
+            <View
               style={{ height: 41, width: width, padding: 6, backgroundColor: '#F5F5F5', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 6 }}>
                 <Image style={{ width: 10, height: 10 }} source={require('../images/del_icon1.png')}></Image>
@@ -431,7 +435,7 @@ export default class HomePage extends Component {
           <View style={styles.jdcell}>
             <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
             <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+              <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
               <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
               <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -447,7 +451,7 @@ export default class HomePage extends Component {
           <View style={styles.jdcell}>
             <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
             <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+              <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
               <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
               <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -463,7 +467,7 @@ export default class HomePage extends Component {
           <View style={styles.jdcell}>
             <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
             <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+              <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
               <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
               <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -478,57 +482,58 @@ export default class HomePage extends Component {
           </View>
         </ScrollView>
 
-        <ScrollView>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={this.state.showModal}
-          onRequestClose={() => this.setState({ showModal: false })}
-        >
-          <View style={{ backgroundColor: 'rgba(0,0,0,.6)', flex: 1, flexDirection: 'row' }}>
-            <TouchableOpacity style={{ backgroundColor: 'transparent' }} activeOpacity={1} onPress={() => { this.setState({ showModal: false }) }}>
-              <View style={{ width: shadowWidth, height: '100%', backgroundColor: 'transparent', }} />
-            </TouchableOpacity>
-            <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-              {/* title */}
-              <View style={{
-                width: '100%', height: 45, marginTop: 44, justifyContent: 'center', alignItems: 'center',
-              }}>
-                <Text style={{ fontSize: 18, color: '#000000' }}>{'筛选'}</Text>
-              </View>
+        
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.showModal}
+            onRequestClose={() => this.setState({ showModal: false })}
+          >
+          <ScrollView>
+            <View style={{ backgroundColor: 'rgba(0,0,0,.6)', flex: 1, flexDirection: 'row' }}>
+              <TouchableOpacity style={{ backgroundColor: 'transparent' }} activeOpacity={1} onPress={() => { this.setState({ showModal: false }) }}>
+                <View style={{ width: shadowWidth, height: '100%', backgroundColor: 'transparent', }} />
+              </TouchableOpacity>
+              <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+                {/* title */}
+                <View style={{
+                  width: '100%', height: 45, marginTop: 44, justifyContent: 'center', alignItems: 'center',
+                }}>
+                  <Text style={{ fontSize: 18, color: '#000000' }}>{'筛选'}</Text>
+                </View>
 
-              {this.itemTitleListView()}
+                {this.itemTitleListView()}
 
-              <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
-                <View style={{ flexDirection: 'row', marginRight: 25 }}>
-                  <TouchableOpacity onPress={() => {
-                    this.clear();
-                  }}>
-                    <View style={{
-                      width: 75, height: 40, backgroundColor: '#B92424', justifyContent: 'center', alignItems: 'center',
-                      borderTopLeftRadius: 20, borderBottomLeftRadius: 20,
+                <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
+                  <View style={{ flexDirection: 'row', marginRight: 25 }}>
+                    <TouchableOpacity onPress={() => {
+                      this.clear();
                     }}>
-                      <Text style={{ fontSize: 15, color: '#000000' }}>{'重置'}</Text>
-                    </View>
-                  </TouchableOpacity>
+                      <View style={{
+                        width: 75, height: 40, backgroundColor: '#B92424', justifyContent: 'center', alignItems: 'center',
+                        borderTopLeftRadius: 20, borderBottomLeftRadius: 20,
+                      }}>
+                        <Text style={{ fontSize: 15, color: '#000000' }}>{'重置'}</Text>
+                      </View>
+                    </TouchableOpacity>
 
-                  <TouchableOpacity onPress={() => {
-                    this.save();
-                  }}>
-                    <View style={{
-                      width: 75, height: 40, backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center',
-                      borderTopRightRadius: 20, borderBottomRightRadius: 20,
+                    <TouchableOpacity onPress={() => {
+                      this.save();
                     }}>
-                      <Text style={{ fontSize: 15, color: '#B92324' }}>{'确定'}</Text>
-                    </View>
-                  </TouchableOpacity>
+                      <View style={{
+                        width: 75, height: 40, backgroundColor: '#000000', justifyContent: 'center', alignItems: 'center',
+                        borderTopRightRadius: 20, borderBottomRightRadius: 20,
+                      }}>
+                        <Text style={{ fontSize: 15, color: '#B92324' }}>{'确定'}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
-          
-        </Modal>
-        </ScrollView>
+            </ScrollView>
+          </Modal>
+        
       </View>
 
 
@@ -546,7 +551,7 @@ const styles = StyleSheet.create({
   img: {
     resizeMode: 'contain',
     width: width,
-    height: 148,
+    height: imgH,
   },
   jdcell: {
     height: 142,

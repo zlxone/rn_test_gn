@@ -5,6 +5,8 @@ import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
+const orderImage = Image.resolveAssetSource(require('../images/lbt0.png'));
+const imgH = orderImage.height/(orderImage.width/width)
 
 
 export default class App extends Component {
@@ -16,11 +18,13 @@ export default class App extends Component {
       <View style={styles.container}>
 
         <ScrollView>
-          <View style={{ height: 200, width: width }}>
+          <View style={{  width: width }}>
             <Swiper
-              style={styles.swiper}
-              height={200}
+              style={{backgroundColor:'white',marginBottom:1}}
+              height={imgH}
+              autoplay={true}
               horizontal={true}
+              showsPagination={false}
               paginationStyle={{ bottom: 10 }}
               showsButtons={false}>
               <Image source={require('../images/lbt00.png')} style={styles.img} />
@@ -107,7 +111,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAEAEA',
   },
   img: {
+    resizeMode:'contain',
     width: width,
-    height: 200,
+    height: imgH,
   },
 });

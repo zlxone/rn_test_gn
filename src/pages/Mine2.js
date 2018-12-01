@@ -37,7 +37,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -51,7 +51,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -65,7 +65,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -79,7 +79,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -93,7 +93,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -107,7 +107,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -126,7 +126,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -140,7 +140,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -154,7 +154,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -173,7 +173,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -192,7 +192,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -211,7 +211,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -228,7 +228,7 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={{ alignItems: 'center', width: width, height: 64, backgroundColor: 'white' }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 19, height: 64, lineHeight: 64, }}>我</Text>
+                    <Text style={{ fontSize: 19, height: 64, lineHeight: 64,color:'black' }}>我</Text>
                 </View>
                 <ScrollView stickyHeaderIndices={[1]}>
 
