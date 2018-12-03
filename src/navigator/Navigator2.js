@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, } from 'react-navigation';
 // import TabNavigator from 'react-native-tab-navigator';
 import Home from '../pages/Home'
@@ -10,12 +10,13 @@ import Search from '../pages/Search'
 import OrderDetail from '../pages/OrderDetail'
 import Personal from '../pages/personal'
 import Changetel from '../pages/Changetel'
+// import test from '../pages/test'
 
 
 class BackImg extends Component {
     render() {
-        return(
-            <Image source={require('../images/icon_bake.png')} style={{width:24,height:24}}/>
+        return (
+            <Image source={require('../images/icon_bake.png')} style={{ width: 24, height: 24 }} />
         );
     }
 }
@@ -23,7 +24,7 @@ class BackImg extends Component {
 
 const Tab = createBottomTabNavigator(
     {
-        Home:  Home,
+        Home: Home,
         Mine: Mine2,
     },
     {
@@ -48,7 +49,7 @@ const Tab = createBottomTabNavigator(
         },
         animationEnabled: false,
         swipeEnabled: false,
-       } 
+    }
 )
 
 
@@ -59,7 +60,7 @@ const RootStack = createStackNavigator({
             header: null
         }
     },
-    Search:  Search,        
+    Search: Search,
     OrderTaking: OrderTaking,
     OrderDetail: OrderDetail,
     Personal: Personal,
@@ -69,17 +70,17 @@ const RootStack = createStackNavigator({
         initialRouteName: 'Main',
         navigationOptions: {
             headerStyle: {
-              backgroundColor: 'white',
+                backgroundColor: 'white',
             },
             headerTintColor: '#000000',
             headerTitleStyle: {
-              textAlign:'center',
-              width:'72%',
-              fontSize:19,
+                textAlign: 'center',
+                width: '72%',
+                fontSize: 19,
             },
-            headerBackImage: <BackImg/>  
-          },          
-                     
+            headerBackImage: <BackImg />
+        },
+
     }
 
 );

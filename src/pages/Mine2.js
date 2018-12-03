@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
-
+var mydata = require('../public/data.json');
 
 export default class App extends Component {
     static navigationOptions = {
@@ -18,96 +18,27 @@ export default class App extends Component {
             ypj: null,
             yjj: null,
             chooseItem: styles.jdcell,
-            show: false,
-            showybm: false,
-            showywc: false,
-            showypj: false,
-            showyjj: false,
+            show: null,
+            showybm: null,
+            showywc: null,
+            showypj: null,
+            showyjj: null,
+            data: null,
+            dataybm: null,
+            dataywc: null,
+            dataypj: null,
+            datayjj: null
         }
     }
 
-    render1() {
-        return (
-            <Text>79</Text>
-        )
-    }
+
     render() {
         show = this.state.chooseItem = this.state.all ?
             <View>
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                            <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                                <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已报名</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.jdcell}>
-                    <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-                    <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                            <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#B92424', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
-                                <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>待评价</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.jdcell}>
-                    <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-                    <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                            <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#222224', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#222224', borderRadius: 2 }}>
-                                <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已完成</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.jdcell}>
-                    <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-                    <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                            <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
-                                <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已拒绝</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.jdcell}>
-                    <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-                    <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                            <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                                <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已报名</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.jdcell}>
-                    <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-                    <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -126,35 +57,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                            <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                                <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已报名</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.jdcell}>
-                    <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-                    <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-                        <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                            <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                                <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已报名</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.jdcell}>
-                    <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-                    <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -173,7 +76,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -192,7 +95,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -211,7 +114,7 @@ export default class App extends Component {
                 <View style={styles.jdcell}>
                     <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
                     <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-                        <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
+                        <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
                         <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
@@ -228,12 +131,9 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={{ alignItems: 'center', width: width, height: 64, backgroundColor: 'white' }}>
-                    <Text style={{ fontSize: 19, height: 64, lineHeight: 64,color:'black' }}>我</Text>
+                    <Text style={{ fontSize: 19, height: 64, lineHeight: 64, color: 'black' }}>我</Text>
                 </View>
                 <ScrollView stickyHeaderIndices={[1]}>
-
-
-
                     <View style={{ backgroundColor: 'white', marginTop: 6, padding: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -247,41 +147,136 @@ export default class App extends Component {
                             </View>
                         </View>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Personal')}>
-                        <Image source={require('../images/ljt.png')}></Image>
-                            </TouchableOpacity>
-                        </View>
-
-
-                <View style={{ backgroundColor: 'white', marginTop: 10, paddingTop: 16, }}>
-                    <Text style={{ fontSize: 18, color: '#222224', paddingLeft: 16, paddingRight: 16, marginBottom: 10 }}>我的兼职</Text>
-                    <View style={{ flexDirection: 'row', height: 30, justifyContent: 'space-around' }}>
-                        <Text style={this.state.all}
-                            onPress={() => this.setState({ chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })}
-                        >全部</Text>
-                        <Text style={this.state.ybm}
-                            onPress={() => this.setState({ chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })}
-                        >已报名</Text>
-                        <Text style={this.state.ywc}
-                            onPress={() => this.setState({ chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })}
-                        >已完成</Text>
-                        <Text style={this.state.ypj}
-                            onPress={() => this.setState({ chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })}
-                        >已评价</Text>
-                        <Text style={this.state.yjj}
-                            onPress={() => this.setState({ chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })}
-                        >已拒绝</Text>
+                            <Image source={require('../images/ljt.png')}></Image>
+                        </TouchableOpacity>
                     </View>
-                </View>
-                {show}
-                {showybm}
-                {showywc}
-                {showypj}
-                {showyjj}
+
+                    <View style={{ backgroundColor: 'white', marginTop: 10, paddingTop: 16, }}>
+                        <Text style={{ fontSize: 18, color: '#222224', paddingLeft: 16, paddingRight: 16, marginBottom: 10 }}>我的兼职</Text>
+                        <View style={{ flexDirection: 'row', height: 30, justifyContent: 'space-around' }}>
+                            <Text style={this.state.all}
+                                onPress={() => this.setState({ chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })}
+                            >全部</Text>
+                            <Text style={this.state.ybm}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })}
+                            >已报名</Text>
+                            <Text style={this.state.ywc}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })}
+                            >已完成</Text>
+                            <Text style={this.state.ypj}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })}
+                            >已评价</Text>
+                            <Text style={this.state.yjj}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })}
+                            >已拒绝</Text>
+                        </View>
+                    </View>
+
+                    {this._renderList()}
+
                 </ScrollView>
             </View >
         );
     }
+
+    _renderList = () => {
+        var data = [];
+        var dataybm = [];
+        var dataywc = [];
+        var dataypj = [];
+        var datayjj = [];
+        for (var i = 0; i < mydata.data.length; i++) {
+            data.push(mydata.data[i]);
+            if (mydata.data[i].status == 0) {
+                dataybm.push(mydata.data[i]);
+            } else if (mydata.data[i].status == 1) {
+                dataywc.push(mydata.data[i])
+            } else if (mydata.data[i].status == 2) {
+                dataypj.push(mydata.data[i])
+            } else if (mydata.data[i].status == 3) {
+                datayjj.push(mydata.data[i])
+            }
+        }
+        var selectData = this.state.chooseItem = this.state.ybm ? dataybm :
+            this.state.chooseItem = this.state.ywc ? dataywc :
+                this.state.chooseItem = this.state.ypj ? dataypj :
+                    this.state.chooseItem = this.state.yjj ? datayjj :
+                        data;
+
+
+        return (
+            <FlatList
+                ref={(flatList) => this._flatList = flatList}
+                // ListHeaderComponent={this._header}
+                // ListFooterComponent={this._footer}
+                ItemSeparatorComponent={this._separator}
+                renderItem={this._renderItem}
+                // onRefresh={this.refreshing}
+                refreshing={false}
+                onEndReachedThreshold={0}
+                // onEndReached={this._onload}
+                // numColumns ={3}
+                // columnWrapperStyle={{borderWidth:2,borderColor:'black',paddingLeft:20}}
+                //horizontal={true}
+                getItemLayout={(data, index) => (
+                    { length: 142, offset: 142 * index, index }
+                )}
+                data={selectData}>
+                >
+          </FlatList>
+        );
+
+    }
+
+    _renderItem = (item) => {
+        return (
+            <View style={styles.jdcell}>
+                <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
+                <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
+                    <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
+                    <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.type}</Text>
+                    <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.number}人</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
+                        <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.price}/天</Text>
+                        {this._renderButton()}
+                    </View>
+                </View>
+            </View>
+        )
+
+    }
+
+    _renderButton = () => {
+        if (this.state.ybm != null) {
+            return (
+                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
+                    <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已报名</Text>
+                </TouchableOpacity>
+            )
+        } else if (this.state.ywc != null) {
+            return (
+                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#B92424', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
+                    <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>待评价</Text>
+                </TouchableOpacity>
+            )
+        } else if (this.state.ypj != null) {
+            return (
+                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#222224', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#222224', borderRadius: 2 }}>
+                    <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已完成</Text>
+                </TouchableOpacity>
+            )
+        } else if (this.state.yjj != null) {
+            return (
+                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
+                    <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已拒绝</Text>
+                </TouchableOpacity>
+            )
+        }
+    }
 }
+
+
+
 
 const styles = StyleSheet.create({
     container: {
