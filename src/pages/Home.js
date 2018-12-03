@@ -37,7 +37,8 @@ const itemNumColumns = 3;
 const itemWidth = ((width - shadowWidth) - (itemNumColumns + 1) * itemMargin) / itemNumColumns;
 const itemHeight = 0; //高度不需要自定义 这里不作处理
 const orderImage = Image.resolveAssetSource(require('../images/lbt0.png'));
-const imgH = orderImage.height/(orderImage.width/width)
+const imgH = orderImage.height / (orderImage.width / width)
+var mydata = require('../public/data.json');
 //const shadowWidth
 /**
  * 类：侧边筛选功能modal
@@ -365,6 +366,10 @@ export default class HomePage extends Component {
 
 
   render() {
+    var data = [];
+    for (var i = 0; i < mydata.data.length; i++) {
+      data.push(mydata.data[i]);
+    }
 
     return (
       <View style={styles.container}>
@@ -374,7 +379,7 @@ export default class HomePage extends Component {
           barStyle={'dark-content'}
         />
         <View style={{ alignItems: 'center', width: width, height: 64, backgroundColor: 'white' }}>
-          <Text style={{  fontSize: 19, height: 64, lineHeight: 64,color:'black' }}>光年达意人力资源</Text>
+          <Text style={{ fontSize: 19, height: 64, lineHeight: 64, color: 'black' }}>光年达意人力资源</Text>
         </View>
         <ScrollView >
 
@@ -401,7 +406,7 @@ export default class HomePage extends Component {
 
           <View style={{ marginTop: 8 }}>
             <Swiper
-              style={{backgroundColor:'white',marginBottom:1}}
+              style={{ backgroundColor: 'white', marginBottom: 1 }}
               height={imgH}
               autoplay={true}
               horizontal={true}
@@ -414,81 +419,51 @@ export default class HomePage extends Component {
             </Swiper>
           </View>
 
-          <View >
-            <View
-              style={{ height: 41, width: width, padding: 6, backgroundColor: '#F5F5F5', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 6 }}>
-                <Image style={{ width: 10, height: 10 }} source={require('../images/del_icon1.png')}></Image>
-                <Text style={{ fontSize: 14, marginLeft: 4, marginRight: 4 }}>接单大厅</Text>
-                <Image style={{ width: 10, height: 10 }} source={require('../images/del_icon2.png')}></Image>
-              </View>
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('OrderTaking')}>
-                <Image style={{ width: 20, height: 20 }} source={require('../images/icon_more_n.png')}></Image>
-              </TouchableOpacity>
-
+          <View
+            style={{ height: 41, width: width, padding: 6, backgroundColor: '#F5F5F5', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 6 }}>
+              <Image style={{ width: 10, height: 10 }} source={require('../images/del_icon1.png')}></Image>
+              <Text style={{ fontSize: 14, marginLeft: 4, marginRight: 4 }}>接单大厅</Text>
+              <Image style={{ width: 10, height: 10 }} source={require('../images/del_icon2.png')}></Image>
             </View>
+
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('OrderTaking')}>
+              <Image style={{ width: 20, height: 20 }} source={require('../images/icon_more_n.png')}></Image>
+            </TouchableOpacity>
+
           </View>
 
 
 
-          <View style={styles.jdcell}>
-            <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-            <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-              <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-              <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-              <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('OrderDetail')}
-                  style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                  <Text style={{ color: '#222224', fontWeight: 'bold' }}>立即报名</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-          <View style={styles.jdcell}>
-            <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-            <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-              <Text style={{  fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-              <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-              <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('OrderDetail')}
-                  style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                  <Text style={{ color: '#222224', fontWeight: 'bold' }}>立即报名</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-          <View style={styles.jdcell}>
-            <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
-            <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
-              <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>招网拍模特 工资日结</Text>
-              <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>礼仪/模特</Text>
-              <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：10人</Text>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>200/天</Text>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('OrderDetail')}
-                  style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                  <Text style={{ color: '#222224', fontWeight: 'bold' }}>立即报名</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
+          <FlatList
+            ref={(flatList) => this._flatList = flatList}
+            // ListHeaderComponent={this._header}
+            // ListFooterComponent={this._footer}
+            ItemSeparatorComponent={this._separator}
+            renderItem={this._renderItem}
+            // onRefresh={this.refreshing}
+            refreshing={false}
+            onEndReachedThreshold={0}
+            // onEndReached={this._onload}
+            // numColumns ={3}
+            // columnWrapperStyle={{borderWidth:2,borderColor:'black',paddingLeft:20}}
+            //horizontal={true}
+            getItemLayout={(data, index) => (
+              { length: 142, offset: 142 * index, index }
+            )}
+            data={data}>
+            >
+          </FlatList>
         </ScrollView>
 
-        
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.showModal}
-            onRequestClose={() => this.setState({ showModal: false })}
-          >
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.showModal}
+          onRequestClose={() => this.setState({ showModal: false })}
+        >
           <ScrollView>
             <View style={{ backgroundColor: 'rgba(0,0,0,.6)', flex: 1, flexDirection: 'row' }}>
               <TouchableOpacity style={{ backgroundColor: 'transparent' }} activeOpacity={1} onPress={() => { this.setState({ showModal: false }) }}>
@@ -531,14 +506,41 @@ export default class HomePage extends Component {
                 </View>
               </View>
             </View>
-            </ScrollView>
-          </Modal>
-        
+          </ScrollView>
+        </Modal>
+
       </View>
 
 
     );
   }
+
+  _renderItem = (item) => {
+    console.log(item)
+    return (
+      <View style={styles.jdcell}>
+        <Image source={require('../images/jd1.png') /* {uri:item.item.img} */} style={{ width: 110, height: 110 }}></Image>
+        <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
+          <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
+          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.type}</Text>
+          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.number}人</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
+            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.price}/天</Text>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('OrderDetail')}
+              style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
+              <Text style={{ color: '#222224', fontWeight: 'bold' }}>立即报名</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  _separator = () => {
+    return <View style={{height:1,backgroundColor:'#EAEAEA'}}/>;
+}
+
 }
 
 const styles = StyleSheet.create({
@@ -557,8 +559,8 @@ const styles = StyleSheet.create({
     height: 142,
     width: width,
     padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#EAEAEA',
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#EAEAEA',
     backgroundColor: 'white',
     flexDirection: 'row'
   }
