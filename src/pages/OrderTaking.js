@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import R,{ Network,ToastUtil } from '../public/R';
 
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
@@ -9,11 +10,50 @@ export default class App extends Component {
   static navigationOptions = {
     title: '接单大厅',
   };
+constructor(props){
+  super(props);
+  this.state={
+    mydata0:[]
+  }
+}
+  
+  componentDidMount(){
+    fetch('http://lightyear.lnkj6.com/index.php/Home/public/partlist', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
+      .then((response) => response.json())
+      .then(({ info, data, status }) => {       // 获取到的数据处理
+        this.setState({ mydata0: data })
+      })
+      .catch((error) => { // 错误处理
+      })
+      .done();
+
+    // let params = {
+    //   page:'10'
+    // }
+    // Network.fetchRequest('http://lightyear.lnkj6.com/index.php/Home/public/partlist','GET',params)
+    //     .then(({info,data,status}) => {
+    //         if(status == '1'){
+    //             this.setState({mydata0:data})
+    //           // console.log(this.state.mydata0.length)
+    //         }else{
+
+    //         }
+    //     }).catch(error => {
+    //         // ToastUtil.toastShort(Network.ErrorMessage);
+    //     });
+}
+
+
   render() {
-    var data = [];
-    for (var i = 0; i < mydata.data.length; i++) {
-      data.push(mydata.data[i]);
-    }
+    // var data = [];
+    // for (var i = 0; i < mydata.data.length; i++) {
+    //   data.push(mydata.data[i]);
+    // }
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -33,7 +73,7 @@ export default class App extends Component {
             getItemLayout={(data, index) => (
               { length: 142, offset: 142 * index, index }
             )}
-            data={data}>
+            data={this.state.mydata0}>
             >
           </FlatList>
          </ScrollView>
@@ -46,13 +86,13 @@ export default class App extends Component {
     console.log(item)
     return (
       <View style={styles.jdcell}>
-        <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
+        <Image source={require('../images/jd1.png') /* {uri:item.item.photo_path} */} style={{ width: 110, height: 110 }}></Image>
         <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
           <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
-          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.type}</Text>
-          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.number}人</Text>
+          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.name}</Text>
+          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.people}人</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.price}/天</Text>
+            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.wages}</Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('OrderDetail')}
               style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>

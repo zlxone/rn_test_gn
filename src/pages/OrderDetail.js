@@ -13,6 +13,54 @@ export default class App extends Component {
   static navigationOptions = {
     title: '详情',
   };
+
+constructor(props){
+  super(props);
+  this.state={
+    mydata0:[]
+  }
+}
+
+componentDidMount(){
+  fetch('http://lightyear.lnkj6.com/index.php/Home/Public/partdetails', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body:"id=1"
+  })
+    .then((response) => response.json())
+    .then(({ info, data, status }) => {       // 获取到的数据处理
+      this.setState({ mydata0: data })
+    })
+    .catch((error) => { // 错误处理
+    })
+    .done();
+  }
+
+
+  _tj(){
+    if(1 == 1){
+      fetch('http://lightyear.lnkj6.com/index.php/Home/Public/partdetails', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body:"id=1&token=123456789"
+      })
+        .then((response) => response.json())
+        .then(({ info, data, status }) => {       // 获取到的数据处理
+          this.setState({ mydata0: data })
+        })
+        .catch((error) => { // 错误处理
+        })
+        .done();
+    }else{
+      Alert.alert('','您的资料不完善，请先完善资料',[{text: 'OK', onPress: () => console.log('OK Pressed')},],{cancelable:false})
+    }
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -88,7 +136,8 @@ export default class App extends Component {
               </Text>
           </View>
           <View style={{paddingTop:40,marginBottom:40,paddingLeft:15,paddingRight:15}}>
-          <TouchableOpacity onPress={()=>Alert.alert('','您的资料不完善，请先完善资料',[{text: 'OK', onPress: () => console.log('OK Pressed')},],{cancelable:false})} style={{height:50,backgroundColor:'#B92424',borderRadius:4,justifyContent:'center',alignItems:'center'}}>
+          <TouchableOpacity onPress={()=>{this._tj()}} 
+          style={{height:50,backgroundColor:'#B92424',borderRadius:4,justifyContent:'center',alignItems:'center'}}>
             <Text style={{fontSize:18,fontWeight:'bold'}}>
             立即报名
             </Text>
