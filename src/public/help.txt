@@ -1,0 +1,26 @@
+config配置文件
+net网络封装
+res资源文件
+tools工具类
+uimodule自定义ui组件
+index.js -- 入口文件
+
+index 返回所有数据
+
+config
+config.js - 全局配置文件
+userInfo.js - 个人信息全局
+net
+net.js - 网络封装
+res
+color.js - 颜色文件
+tools
+filterRE.js - js过滤文件-正则表达式
+stringUtil.js - 字符串工具类，拼接查找判断等
+numUtil.js - 数字，取整取余，
+adapter.js - 适配算法。
+three_party
+//storage.js - 缓存初始化（）
+//storageType.js - 缓存文件名集合（）
+uimodule
+自定义ui组件等。通用ui模块的内容都在这里

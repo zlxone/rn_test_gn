@@ -1,60 +1,61 @@
 {
     "data": [  
       {
-        "img" : "../images/jd1.png",
+        "photo_path" : "../images/jd1.png",
         "title" : "招网拍模特 工资日结",
-        "type" : "礼仪/模特",
-        "number" : "10",
-        "price" : "270",
-        "status":"1"
-      },
-      {
-        "img" : "../images/jd1.png",
-        "title" : "招传单 工资日结",
-        "type" : "礼仪/模特",
-        "number" : "17",
-        "price" : "290",
-        "status":"3"
-      },
-      {
-        "img" : "../images/jd1.png",
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "310元/天",
+        "type":"2"
+      },{
+        "photo_path" : "../images/jd1.png",
         "title" : "招网拍模特 工资日结",
-        "type" : "礼仪/模特",
-        "number" : "10",
-        "price" : "800",
-        "status":"0"
-      },
-      {
-        "img" : "../images/jd1.png",
-        "title" : "创意策划 工资日结",
-        "type" : "礼仪/模特",
-        "number" : "10",
-        "price" : "200",
-        "status":"1"
-      },
-      {
-        "img" : "../images/jd1.png",
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "270元/天",
+        "type":"1"
+      },{
+        "photo_path" : "../images/jd1.png",
         "title" : "招网拍模特 工资日结",
-        "type" : "礼仪/模特",
-        "number" : "10",
-        "price" : "440",
-        "status":"2"
-      },
-      {
-        "img" : "../images/jd1.png",
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "330元/天",
+        "type":"3"
+      },{
+        "photo_path" : "../images/jd1.png",
         "title" : "招网拍模特 工资日结",
-        "type" : "礼仪/模特",
-        "number" : "10",
-        "price" : "200",
-        "status":"0"
-      },
-      {
-        "img" : "../images/jd1.png",
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "290元/天",
+        "type":"2"
+      },{
+        "photo_path" : "../images/jd1.png",
         "title" : "招网拍模特 工资日结",
-        "type" : "礼仪/模特",
-        "number" : "10",
-        "price" : "200",
-        "status":"0"
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "270元/天",
+        "type":"0"
+      },{
+        "photo_path" : "../images/jd1.png",
+        "title" : "招网拍模特 工资日结",
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "270元/天",
+        "type":"0"
+      },{
+        "photo_path" : "../images/jd1.png",
+        "title" : "招网拍模特 工资日结",
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "270元/天",
+        "type":"1"
+      },{
+        "photo_path" : "../images/jd1.png",
+        "title" : "招网拍模特 工资日结",
+        "name" : "礼仪/模特",
+        "people" : "10",
+        "wages" : "670元/天",
+        "type":"2"
       }
       
     ]

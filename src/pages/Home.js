@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput, StatusBar, Dimensions, Modal, FlatList, } from 'react-native';
 import Swiper from 'react-native-swiper';
+import R, { Network, ToastUtil } from '../public/R';
 
 
 // var Dimensions = require('Dimensions');
@@ -51,7 +52,6 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       showModal: false,
-
       titleList: [
         { id: 1, title: '兼职类型', type: TYPE_CHECKBOX, isOpen: true },
         { id: 2, title: '特殊需求', type: TYPE_RADIO_DEMAND, isOpen: true },
@@ -76,12 +76,10 @@ export default class HomePage extends Component {
       ],
       demand: true, //true为是  false为否
       sex: true, //true为男  false为女
+      mydata0: [],
     }
   }
 
-  componentDidMount() {
-
-  }
 
   save() {
     let s = '';
@@ -362,14 +360,50 @@ export default class HomePage extends Component {
   }
 
 
+  componentDidMount() {
 
+    fetch('http://lightyear.lnkj6.com/index.php/Home/public/partlist', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
+      .then((response) => response.json())
+      .then(({ info, data, status }) => {       // 获取到的数据处理
+        this.setState({ mydata0: data })
+      })
+      .catch((error) => { // 错误处理
+        ToastUtil.toastShort(Network.ErrorMessage);
+      })
+      .done();
+
+
+    // let params = {
+    //   page: '10'
+    // }
+    // Network.fetchRequest('http://lightyear.lnkj6.com/index.php/Home/public/partlist', 'POST', params)
+    //   .then(({ info, data, status }) => {
+    //     if (status == '1') {
+    //       alert("123789")
+    //       this.setState({ mydata0: data })
+    //       alert("123")
+    //     } else {
+
+    //     }
+    //   }).catch(error => {
+    //     ToastUtil.toastShort(Network.ErrorMessage);
+    //   });
+  }
 
 
   render() {
-    var data = [];
-    for (var i = 0; i < mydata.data.length; i++) {
-      data.push(mydata.data[i]);
-    }
+    // var data = [];
+    // for (var i = 0; i < mydata.data.length; i++) {
+    //   data.push(mydata.data[i]);
+    // }
+    // for (var i = 0; i < this.state.mydata0.length; i++) {
+    //   data.push(this.state.mydata0[i]);
+    // }
 
     return (
       <View style={styles.container}>
@@ -382,7 +416,6 @@ export default class HomePage extends Component {
           <Text style={{ fontSize: 19, height: 64, lineHeight: 64, color: 'black' }}>光年达意人力资源</Text>
         </View>
         <ScrollView >
-
           <View style={{ flexDirection: 'row', paddingLeft: 15, paddingRight: 15, height: 40, alignItems: 'center', justifyContent: 'space-between' }}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
               <View style={{ flexDirection: 'row', paddingLeft: 8, marginTop: 8, alignItems: 'center', backgroundColor: 'white', borderRadius: 8, height: 40, width: width - 70, borderColor: 'gray', borderWidth: 1, }}>
@@ -403,7 +436,6 @@ export default class HomePage extends Component {
               </Image>
             </TouchableOpacity>
           </View>
-
           <View style={{ marginTop: 8 }}>
             <Swiper
               style={{ backgroundColor: 'white', marginBottom: 1 }}
@@ -418,8 +450,6 @@ export default class HomePage extends Component {
               <Image source={require('../images/lbt0.png')} style={styles.img} />
             </Swiper>
           </View>
-
-
           <View
             style={{ height: 41, width: width, padding: 6, backgroundColor: '#F5F5F5', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 6 }}>
@@ -433,8 +463,6 @@ export default class HomePage extends Component {
             </TouchableOpacity>
 
           </View>
-
-
 
           <FlatList
             ref={(flatList) => this._flatList = flatList}
@@ -452,11 +480,11 @@ export default class HomePage extends Component {
             getItemLayout={(data, index) => (
               { length: 142, offset: 142 * index, index }
             )}
-            data={data}>
-            >
+            // data={mydata.data}
+            data={this.state.mydata0}
+          >
           </FlatList>
         </ScrollView>
-
 
         <Modal
           animationType="slide"
@@ -510,8 +538,6 @@ export default class HomePage extends Component {
         </Modal>
 
       </View>
-
-
     );
   }
 
@@ -519,13 +545,13 @@ export default class HomePage extends Component {
     console.log(item)
     return (
       <View style={styles.jdcell}>
-        <Image source={require('../images/jd1.png') /* {uri:item.item.img} */} style={{ width: 110, height: 110 }}></Image>
+        <Image source={require('../images/jd1.png') /* {uri:item.item.photo_path} */} style={{ width: 110, height: 110 }}></Image>
         <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
           <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
-          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.type}</Text>
-          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.number}人</Text>
+          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.name}</Text>
+          <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.people}人</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.price}/天</Text>
+            <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.wages}</Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('OrderDetail')}
               style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
@@ -538,8 +564,8 @@ export default class HomePage extends Component {
   }
 
   _separator = () => {
-    return <View style={{height:1,backgroundColor:'#EAEAEA'}}/>;
-}
+    return <View style={{ height: 1, backgroundColor: '#EAEAEA' }} />;
+  }
 
 }
 

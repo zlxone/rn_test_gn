@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import R,{ Network,ToastUtil } from '../public/R';
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
 
@@ -8,6 +9,49 @@ export default class App extends Component {
     static navigationOptions = {
         title: '个人资料',
       };
+
+      constructor(props){
+          super(props);
+
+      }
+
+      componentDidMount() {
+
+        fetch('http://lightyear.lnkj6.com/index.php/Home/index/index', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "token=123456789"
+        })
+          .then((response) => response.json())
+          .then(({ info, data, status }) => {       // 获取到的数据处理
+            this.setState({ mydata0: data })
+            alert(data[0].real_name)
+          })
+          .catch((error) => { // 错误处理
+            // ToastUtil.toastShort(Network.ErrorMessage);
+          })
+          .done();
+    
+    
+        // let params = {
+        //   page: '10'
+        // }
+        // Network.fetchRequest('http://lightyear.lnkj6.com/index.php/Home/public/partlist', 'POST', params)
+        //   .then(({ info, data, status }) => {
+        //     if (status == '1') {
+        //       alert("123789")
+        //       this.setState({ mydata0: data })
+        //       alert("123")
+        //     } else {
+    
+        //     }
+        //   }).catch(error => {
+        //     ToastUtil.toastShort(Network.ErrorMessage);
+        //   });
+      }
+
     render() {
         return (
             <View style={styles.container}>

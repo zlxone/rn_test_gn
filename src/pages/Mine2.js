@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import R,{ Network,ToastUtil } from '../public/R';
+
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
 var mydata = require('../public/data.json');
@@ -27,10 +29,32 @@ export default class App extends Component {
             dataybm: null,
             dataywc: null,
             dataypj: null,
-            datayjj: null
+            datayjj: null,
+            mydata0:[]
         }
     }
 
+    componentDidMount(){
+        // setTimeout(() => {
+        //     SplashScreen.hide();
+        // },1000)
+    
+        let params = {
+          token:'1543917970880689793',
+          type:'1',
+          page:''
+        }
+        Network.fetchRequest('http://lightyear.lnkj6.com/index.php/Home/Index/record','GET',params)
+            .then(({info,data,status}) => {
+                if(status == '1'){
+                    this.setState({mydata0:data})
+                }else{
+    
+                }
+            }).catch(error => {
+                // ToastUtil.toastShort(Network.ErrorMessage);
+            });
+    }
 
     render() {
         show = this.state.chooseItem = this.state.all ?
@@ -187,13 +211,13 @@ export default class App extends Component {
         var datayjj = [];
         for (var i = 0; i < mydata.data.length; i++) {
             data.push(mydata.data[i]);
-            if (mydata.data[i].status == 0) {
+            if (mydata.data[i].type == 0) {
                 dataybm.push(mydata.data[i]);
-            } else if (mydata.data[i].status == 1) {
+            } else if (mydata.data[i].type == 1) {
                 dataywc.push(mydata.data[i])
-            } else if (mydata.data[i].status == 2) {
+            } else if (mydata.data[i].type == 2) {
                 dataypj.push(mydata.data[i])
-            } else if (mydata.data[i].status == 3) {
+            } else if (mydata.data[i].type == 3) {
                 datayjj.push(mydata.data[i])
             }
         }
@@ -221,7 +245,7 @@ export default class App extends Component {
                 getItemLayout={(data, index) => (
                     { length: 142, offset: 142 * index, index }
                 )}
-                data={selectData}>
+                data={selectData}
                 >
           </FlatList>
         );
@@ -231,13 +255,13 @@ export default class App extends Component {
     _renderItem = (item) => {
         return (
             <View style={styles.jdcell}>
-                <Image source={require('../images/jd1.png')} style={{ width: 110, height: 110 }}></Image>
+                <Image source={require('../images/jd1.png') /* {uri:item.item.photo_path} */} style={{ width: 110, height: 110 }}></Image>
                 <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
                     <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
-                    <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.type}</Text>
-                    <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.number}人</Text>
+                    <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.name}</Text>
+                    <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.people}人</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                        <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.price}/天</Text>
+                        <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.wages}</Text>
                         {this._renderButton()}
                     </View>
                 </View>
