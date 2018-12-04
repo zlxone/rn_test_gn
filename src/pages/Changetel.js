@@ -47,14 +47,14 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <View style={{ backgroundColor: 'white', height: 100, paddingLeft: 16, backgroundColor: 'white', marginTop: 6, }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomColor: '#EAEAEA', borderBottomWidth: 1 }}>
+                    <View style={{ flexDirection: 'row',height:50, alignItems: 'center', justifyContent: 'space-between', borderBottomColor: '#EAEAEA', borderBottomWidth: 1 }}>
                         <TextInput placeholder='请输入新的手机号码' keyboardType='numeric' style={{ flex: 1, }}></TextInput>
                         <TouchableOpacity style={{ marginRight: 16, marginLeft: 16 }} onPress={() => { this._getCode() }}>
                             <Text style={{ color: '#B92424', fontSize: 18, width: '100%', }}>获取验证码</Text>
                         </TouchableOpacity>
                     </View>
 
-                    <TextInput placeholder='请输入验证码' style={{ width: width * 0.9, }}></TextInput>
+                    <TextInput placeholder='请输入验证码' style={{ width: width * 0.9,height:50,lineHeight:50 }}></TextInput>
                 </View>
 
                 <View style={{ marginTop: 60, padding: 16, flexDirection: 'row', alignItems: 'center', }}>

@@ -4848,13 +4848,8 @@ react-navigation-tabs@0.8.4:
 
 react-navigation@^2.18.2:
   version "2.18.3"
-<<<<<<< HEAD
-  resolved "http://registry.npm.taobao.org/react-navigation/download/react-navigation-2.18.3.tgz#de9a24dc37dfc33f3e4779a9f13f45ea97dfe19e"
-  integrity sha1-3pok3Dffwz8+R3mp8T9F6pff4Z4=
-=======
   resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-2.18.3.tgz#de9a24dc37dfc33f3e4779a9f13f45ea97dfe19e"
   integrity sha512-/5KGMG1Oj5LN/x/7AKF0MWrpX9Qe29307RxEsMCiRT/A4jCYT0DPY99Bl7ZAGtROxExEy3rwTfTrtvpIT+CU7A==
->>>>>>> 3545cb76b7740c2e1a10ac10929baf8dd4d3a173
   dependencies:
     clamp "^1.0.1"
     create-react-context "0.2.2"

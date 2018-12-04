@@ -17,7 +17,7 @@ const config = {
     /* 全局配置模块 */
     type : type.debug,  //当前模式 正式发布时改成 type.release ！！！！！！！！！！
     showLog : type === 'debug' ? true : false, //是否打印日志
-    baseUrl : 'http://wanjiafengmian.pro1.lnkj1.com/', //全局接口域名
+    baseUrl : 'http://lightyear.lnkj6.com/', //全局接口域名
     baseImgUrl : 'http://wanjiafengmian.pro1.lnkj1.com', //全局图片路径前缀
     
     /* 公共属性模块 */

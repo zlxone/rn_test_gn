@@ -362,37 +362,37 @@ export default class HomePage extends Component {
 
   componentDidMount() {
 
-    fetch('http://lightyear.lnkj6.com/index.php/Home/public/partlist', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    })
-      .then((response) => response.json())
-      .then(({ info, data, status }) => {       // 获取到的数据处理
-        this.setState({ mydata0: data })
-      })
-      .catch((error) => { // 错误处理
-        ToastUtil.toastShort(Network.ErrorMessage);
-      })
-      .done();
-
-
-    // let params = {
-    //   page: '10'
-    // }
-    // Network.fetchRequest('http://lightyear.lnkj6.com/index.php/Home/public/partlist', 'POST', params)
-    //   .then(({ info, data, status }) => {
-    //     if (status == '1') {
-    //       alert("123789")
-    //       this.setState({ mydata0: data })
-    //       alert("123")
-    //     } else {
-
-    //     }
-    //   }).catch(error => {
+    // fetch('http://lightyear.lnkj6.com/index.php/Home/public/partlist', {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   }
+    // })
+    //   .then((response) => response.json())
+    //   .then(({ info, data, status }) => {       // 获取到的数据处理
+    //     this.setState({ mydata0: data })
+    //   })
+    //   .catch((error) => { // 错误处理
     //     ToastUtil.toastShort(Network.ErrorMessage);
-    //   });
+    //   })
+    //   .done();
+
+
+    let params = {
+      page: '10'
+    }
+    Network.fetchRequest('index.php/Home/public/partlist', 'POST', params)
+      .then(({ info, data, status }) => {
+        if (status == '1') {
+          alert("123789")
+          this.setState({ mydata0: data })
+        } else {
+          alert("123789")
+
+        }
+      }).catch(error => {
+        ToastUtil.toastShort(Network.ErrorMessage);
+      });
   }
 
 
