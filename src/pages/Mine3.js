@@ -31,14 +31,14 @@ export default class App extends Component {
             dataypj: null,
             datayjj: null,
             mydata0: [],
-            mydataybm:[],
-            mydataywc:[],
-            mydataypj:[],
-            mydatayjj:[],
+            mydataybm: [],
+            mydataywc: [],
+            mydataypj: [],
+            mydatayjj: [],
             myinfo: [],
             identity: '',
             type: '',
-            
+
         }
     }
 
@@ -51,23 +51,23 @@ export default class App extends Component {
         Network.fetchRequest('index.php/Home/Index/record', 'POST', params)
             .then(({ info, data, status }) => {
                 if (status == '1') {
-                    let arrybm=[];
-                    let arrywc=[];
-                    let arrypj=[];
-                    let arryjj=[];
+                    let arrybm = [];
+                    let arrywc = [];
+                    let arrypj = [];
+                    let arryjj = [];
                     this.setState({ mydata0: data })
-                    for (var i=0; i < data.length; i++) {
+                    for (var i = 0; i < data.length; i++) {
                         // alert(JSON.stringify(data))
-                        if (data[i].type == 1) {                            
+                        if (data[i].type == 1) {
                             arrybm.push(data[i]);
                         }
-                        if (data[i].type == 2) {                            
+                        if (data[i].type == 2) {
                             arrywc.push(data[i]);
                         }
-                        if (data[i].type == 3) {                            
+                        if (data[i].type == 3) {
                             arrypj.push(data[i]);
                         }
-                        if (data[i].type == 4) {                            
+                        if (data[i].type == 4) {
                             arryjj.push(data[i]);
                         }
                     }
@@ -142,7 +142,7 @@ export default class App extends Component {
                     <View style={{ backgroundColor: 'white', marginTop: 10, paddingTop: 16, }}>
                         <Text style={{ fontSize: 18, color: '#222224', paddingLeft: 16, paddingRight: 16, marginBottom: 10 }}>我的兼职</Text>
                         <View style={{ flexDirection: 'row', height: 30, justifyContent: 'space-around' }}>
-                        <Text style={this.state.all}
+                            <Text style={this.state.all}
                                 onPress={() => this.setState({ chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })}
                             >全部</Text>
                             <Text style={this.state.ybm}
@@ -185,10 +185,10 @@ export default class App extends Component {
                 )}
                 data={
                     this.state.all != null ? this.state.mydata0 :
-                    this.state.ywc != null ? this.state.mydataywc :
-                    this.state.ybm != null ? this.state.mydataybm :
-                    this.state.ypj != null ? this.state.mydataypj :
-                    this.state.mydatayjj
+                        this.state.ywc != null ? this.state.mydataywc :
+                            this.state.ybm != null ? this.state.mydataybm :
+                                this.state.ypj != null ? this.state.mydataypj :
+                                    this.state.mydatayjj
                 }
             >
             </FlatList>
@@ -206,40 +206,27 @@ export default class App extends Component {
                     <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 10 }}>人数：{item.item.people}人</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                         <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.wages}</Text>
-                        {this._renderButton()}
+                        {
+                            item.item.type == 2 ?
+                                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#B92424', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
+                                    <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>待评价</Text>
+                                </TouchableOpacity> :
+                                item.item.type == 1 ?
+                                    <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
+                                        <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已报名</Text>
+                                    </TouchableOpacity> :
+                                    item.item.type == 3 ?
+                                        <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#222224', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#222224', borderRadius: 2 }}>
+                                            <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已完成</Text>
+                                        </TouchableOpacity> :
+                                        <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
+                                            <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已拒绝</Text>
+                                        </TouchableOpacity>
+                        }
                     </View>
                 </View>
             </View>
         )
-
-    }
-
-    _renderButton = () => {
-        if (this.state.ybm != null) {
-            return (
-                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
-                    <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已报名</Text>
-                </TouchableOpacity>
-            )
-        } else if (this.state.ywc != null) {
-            return (
-                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#B92424', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
-                    <Text style={{ color: '#222224', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>待评价</Text>
-                </TouchableOpacity>
-            )
-        } else if (this.state.ypj != null) {
-            return (
-                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, backgroundColor: '#222224', paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#222224', borderRadius: 2 }}>
-                    <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已完成</Text>
-                </TouchableOpacity>
-            )
-        } else if (this.state.yjj != null) {
-            return (
-                <TouchableOpacity style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: '#B92424', borderRadius: 2 }}>
-                    <Text style={{ color: '#B92424', width: 60, paddingLeft: 8, fontWeight: 'bold' }}>已拒绝</Text>
-                </TouchableOpacity>
-            )
-        }
     }
 }
 
