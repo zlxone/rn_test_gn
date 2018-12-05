@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import R,{ Network,ToastUtil } from '../public/R';
+import R, { Network, ToastUtil } from '../public/R';
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
 
@@ -8,49 +8,43 @@ var { width } = Dimensions.get('window');
 export default class App extends Component {
     static navigationOptions = {
         title: '个人资料',
-      };
+    };
 
-      constructor(props){
-          super(props);
+    constructor(props) {
+        super(props);
+        this.state = {
+            myinfo: []
+        }
+    }
 
-      }
+    initInfo() {
+        let params = {
+            token: '123456789'
+        }
+        Network.fetchRequest('index.php/Home/index/index', 'POST', params)
+            .then(({ info, data, status }) => {
+                if (status == '1') {
+                    this.setState({ myinfo: data })
+                    if (this.state.myinfo.identity = 0) {
+                        this.setState({ identity: '学生' })
+                    } else {
+                        this.setState({ identity: '社会人士' })
+                    }
+                    // alert(JSON.stringify(this.state.myinfo))
+                } else {
+                    alert("222")
+                }
+            }).catch(error => {
+                // ToastUtil.toastShort(Network.ErrorMessage);
+            });
+    }
 
-      componentDidMount() {
-
-        fetch('http://lightyear.lnkj6.com/index.php/Home/index/index', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: "token=123456789"
-        })
-          .then((response) => response.json())
-          .then(({ info, data, status }) => {       // 获取到的数据处理
-            this.setState({ mydata0: data })
-            alert(data[0].real_name)
-          })
-          .catch((error) => { // 错误处理
-            // ToastUtil.toastShort(Network.ErrorMessage);
-          })
-          .done();
-    
-    
-        // let params = {
-        //   page: '10'
-        // }
-        // Network.fetchRequest('http://lightyear.lnkj6.com/index.php/Home/public/partlist', 'POST', params)
-        //   .then(({ info, data, status }) => {
-        //     if (status == '1') {
-        //       alert("123789")
-        //       this.setState({ mydata0: data })
-        //       alert("123")
-        //     } else {
-    
-        //     }
-        //   }).catch(error => {
-        //     ToastUtil.toastShort(Network.ErrorMessage);
-        //   });
-      }
+    componentDidMount() {
+        // setTimeout(() => {
+        //     SplashScreen.hide();
+        // },1000)
+        this.initInfo();
+    }
 
     render() {
         return (
@@ -60,7 +54,7 @@ export default class App extends Component {
                         头像
             </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image style={{ width: 60, height: 60, marginRight: 8,borderRadius:30 }} source={require('../images/tx.png')}></Image>
+                        <Image style={{ width: 60, height: 60, marginRight: 8, borderRadius: 30 }} source={{uri : this.state.myinfo.photo_path}}></Image>
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
@@ -69,7 +63,7 @@ export default class App extends Component {
                         姓名
             </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ marginRight: 8 }}>叫我小小小圆子</Text>
+                        <Text style={{ marginRight: 8 }}>{this.state.myinfo.real_name}</Text>
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
@@ -79,7 +73,7 @@ export default class App extends Component {
                         年龄
             </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ marginRight: 8 }}>20</Text>
+                        <Text style={{ marginRight: 8 }}>{this.state.myinfo.ages}</Text>
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
@@ -88,7 +82,7 @@ export default class App extends Component {
                         学校
             </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ marginRight: 8 }}>临沂大学</Text>
+                        <Text style={{ marginRight: 8 }}>{this.state.myinfo.school}</Text>
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
@@ -97,22 +91,22 @@ export default class App extends Component {
                         身份
             </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ marginRight: 8 }}>学生</Text>
+                        <Text style={{ marginRight: 8 }}>{this.state.identity}</Text>
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Changetel')}>
-                <View style={{ padding: 10, backgroundColor: 'white', marginTop: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    
+                    <View style={{ padding: 10, backgroundColor: 'white', marginTop: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+
                         <Text>
                             更改手机号
             </Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ marginRight: 8 }}>150...8989</Text>
+                            <Text style={{ marginRight: 8 }}>{this.state.myinfo.username}</Text>
                             <Image source={require('../images/ljt.png')}></Image>
                         </View>
-                    
-                </View>
+
+                    </View>
                 </TouchableOpacity>
             </View>
         );

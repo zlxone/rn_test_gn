@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-import R,{ Network,ToastUtil } from '../public/R';
+import R, { Network, ToastUtil } from '../public/R';
 
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
@@ -10,43 +10,40 @@ export default class App extends Component {
   static navigationOptions = {
     title: '接单大厅',
   };
-constructor(props){
-  super(props);
-  this.state={
-    mydata0:[]
+  constructor(props) {
+    super(props);
+    this.state = {
+      mydata0: []
+    }
   }
-}
-  
-  componentDidMount(){
-    fetch('http://lightyear.lnkj6.com/index.php/Home/public/partlist', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    })
-      .then((response) => response.json())
-      .then(({ info, data, status }) => {       // 获取到的数据处理
-        this.setState({ mydata0: data })
-      })
-      .catch((error) => { // 错误处理
-      })
-      .done();
 
-    // let params = {
-    //   page:'10'
-    // }
-    // Network.fetchRequest('http://lightyear.lnkj6.com/index.php/Home/public/partlist','GET',params)
-    //     .then(({info,data,status}) => {
-    //         if(status == '1'){
-    //             this.setState({mydata0:data})
-    //           // console.log(this.state.mydata0.length)
-    //         }else{
+  initList() {
+    let params = {
+      token: '123456789'
+    }
+    Network.fetchRequest('index.php/Home/public/partlist', 'POST', params)
+      .then(({ info, data, status }) => {
+        if (status == '1') {
+          this.setState({ mydata0: data })
+        } else {
+          this.setState({ mydata0: null })
+        }
+      }).catch(error => {
+        ToastUtil.toastShort(Network.ErrorMessage);
+      });
+  }
 
-    //         }
-    //     }).catch(error => {
-    //         // ToastUtil.toastShort(Network.ErrorMessage);
-    //     });
-}
+
+
+  componentDidMount() {
+    // setTimeout(() => {
+    //   SplashScreen.hide();
+    // }, 1000)
+
+    this.initList(); //初始化列表
+
+
+  }
 
 
   render() {
@@ -76,7 +73,7 @@ constructor(props){
             data={this.state.mydata0}>
             >
           </FlatList>
-         </ScrollView>
+        </ScrollView>
 
       </View>
     );
@@ -86,7 +83,7 @@ constructor(props){
     console.log(item)
     return (
       <View style={styles.jdcell}>
-        <Image source={require('../images/jd1.png') /* {uri:item.item.photo_path} */} style={{ width: 110, height: 110 }}></Image>
+        <Image source={{ uri: item.item.photo_path }} style={{ width: 110, height: 110 }}></Image>
         <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
           <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
           <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.name}</Text>
@@ -94,7 +91,7 @@ constructor(props){
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
             <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.wages}</Text>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('OrderDetail')}
+              onPress={() => this.props.navigation.navigate('OrderDetail', { itemId: item.item.id })}
               style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
               <Text style={{ color: '#222224', fontWeight: 'bold' }}>立即报名</Text>
             </TouchableOpacity>

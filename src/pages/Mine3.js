@@ -32,7 +32,7 @@ export default class App extends Component {
             datayjj: null,
             mydata0: [],
             myinfo: [],
-            identity:'',
+            identity: '',
             type: ''
         }
     }
@@ -46,8 +46,19 @@ export default class App extends Component {
         Network.fetchRequest('index.php/Home/Index/record', 'POST', params)
             .then(({ info, data, status }) => {
                 if (status == '1') {
-                    this.setState({ mydata0: data })
-                    alert(JSON.stringify(this.state.mydata0))
+                    let arr=[];
+                    
+                    for (var i=0; i < data.length; i++) {
+                        // alert(JSON.stringify(data))
+                        if (data[i].type == this.state.type) {                            
+                            arr.push(data[i]);
+                            // alert(JSON.stringify(this.state.mydata0))
+                            // this.setState({ mydata0: data })
+                        }
+                    }
+                    this.setState({ mydata0: arr })
+
+                    // alert(JSON.stringify(this.state.mydata0))
                 } else {
                     alert("999")
                 }
@@ -56,7 +67,7 @@ export default class App extends Component {
             });
     }
 
-    initInfo(){
+    initInfo() {
         let params = {
             token: '123456789'
         }
@@ -64,9 +75,9 @@ export default class App extends Component {
             .then(({ info, data, status }) => {
                 if (status == '1') {
                     this.setState({ myinfo: data })
-                    if(this.state.myinfo.identity = 0){
+                    if (this.state.myinfo.identity = 0) {
                         this.setState({ identity: '学生' })
-                    }else{
+                    } else {
                         this.setState({ identity: '社会人士' })
                     }
                     // alert(JSON.stringify(this.state.myinfo))
@@ -77,6 +88,28 @@ export default class App extends Component {
                 // ToastUtil.toastShort(Network.ErrorMessage);
             });
     }
+
+    selectList() {
+        this.setState({ type: '', chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })
+        this.initRecord();
+    }
+    selectListybm() {
+        this.setState({ type: '1', chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })
+        this.initRecord();
+    }
+    selectListywc() {
+        this.setState({ type: '2', chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })
+        this.initRecord();
+    }
+    selectListypj() {
+        this.setState({ type: '3', chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })
+        this.initRecord();
+    }
+    selectListyjj() {
+        this.setState({ type: '4', chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })
+        this.initRecord();
+    }
+
 
     componentDidMount() {
         // setTimeout(() => {
@@ -97,9 +130,9 @@ export default class App extends Component {
                     <View style={{ backgroundColor: 'white', marginTop: 6, padding: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Image style={{ width: 70, height: 70, marginRight: 8, borderRadius: 35 }} source={{uri:this.state.myinfo.photo_path}}></Image>
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={{ fontSize: 18 }}>{this.state.myinfo.username}</Text>
+                            <Image style={{ width: 70, height: 70, marginRight: 8, borderRadius: 35 }} source={{ uri: this.state.myinfo.photo_path }}></Image>
+                            <View style={{ alignItems: 'center', width: 124, }}>
+                                <Text style={{ fontSize: 18, width: 124, textAlign: "left" }}>{this.state.myinfo.real_name}</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', width: 124, marginTop: 4 }}>
                                     <Text style={{ marginRight: 24 }}>{this.state.identity}</Text>
                                     <Text>{this.state.myinfo.ages}岁</Text>
@@ -115,55 +148,29 @@ export default class App extends Component {
                         <Text style={{ fontSize: 18, color: '#222224', paddingLeft: 16, paddingRight: 16, marginBottom: 10 }}>我的兼职</Text>
                         <View style={{ flexDirection: 'row', height: 30, justifyContent: 'space-around' }}>
                             <Text style={this.state.all}
-                                onPress={() => this.setState({ chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })}
+                                onPress={() => this.selectList()}
                             >全部</Text>
                             <Text style={this.state.ybm}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })}
+                                onPress={() => this.selectListybm()}
                             >已报名</Text>
                             <Text style={this.state.ywc}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })}
+                                onPress={() => this.selectListywc()}
                             >已完成</Text>
                             <Text style={this.state.ypj}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })}
+                                onPress={() => this.selectListypj()}
                             >已评价</Text>
                             <Text style={this.state.yjj}
-                                onPress={() => this.setState({ chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })}
+                                onPress={() => this.selectListyjj()}
                             >已拒绝</Text>
                         </View>
                     </View>
-
                     {this._renderList()}
-
                 </ScrollView>
             </View >
         );
     }
 
     _renderList = () => {
-        var data = [];
-        var dataybm = [];
-        var dataywc = [];
-        var dataypj = [];
-        var datayjj = [];
-        for (var i = 0; i < mydata.data.length; i++) {
-            data.push(mydata.data[i]);
-            if (mydata.data[i].type == 0) {
-                dataybm.push(mydata.data[i]);
-            } else if (mydata.data[i].type == 1) {
-                dataywc.push(mydata.data[i])
-            } else if (mydata.data[i].type == 2) {
-                dataypj.push(mydata.data[i])
-            } else if (mydata.data[i].type == 3) {
-                datayjj.push(mydata.data[i])
-            }
-        }
-        var selectData = this.state.chooseItem = this.state.ybm ? dataybm :
-            this.state.chooseItem = this.state.ywc ? dataywc :
-                this.state.chooseItem = this.state.ypj ? dataypj :
-                    this.state.chooseItem = this.state.yjj ? datayjj :
-                        data;
-
-
         return (
             <FlatList
                 ref={(flatList) => this._flatList = flatList}
@@ -181,7 +188,7 @@ export default class App extends Component {
                 getItemLayout={(data, index) => (
                     { length: 142, offset: 142 * index, index }
                 )}
-                data={selectData}
+                data={this.state.mydata0}
             >
             </FlatList>
         );

@@ -7,7 +7,7 @@
  * 内容：
  * ==========================
  */
-"use strict";
+// "use strict";
 import config from '../config/config';
 
 const Network = {

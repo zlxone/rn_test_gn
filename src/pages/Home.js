@@ -1,6 +1,6 @@
-"use strict";
+// "use strict";
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput, StatusBar, Dimensions, Modal, FlatList, } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput, StatusBar, Dimensions, Modal, FlatList, SplashScreen } from 'react-native';
 import Swiper from 'react-native-swiper';
 import R, { Network, ToastUtil } from '../public/R';
 
@@ -77,6 +77,7 @@ export default class HomePage extends Component {
       demand: true, //true为是  false为否
       sex: true, //true为男  false为女
       mydata0: [],
+      mybanner: []
     }
   }
 
@@ -359,52 +360,47 @@ export default class HomePage extends Component {
     )
   }
 
-
-  componentDidMount() {
-
-    // fetch('http://lightyear.lnkj6.com/index.php/Home/public/partlist', {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   }
-    // })
-    //   .then((response) => response.json())
-    //   .then(({ info, data, status }) => {       // 获取到的数据处理
-    //     this.setState({ mydata0: data })
-    //   })
-    //   .catch((error) => { // 错误处理
-    //     ToastUtil.toastShort(Network.ErrorMessage);
-    //   })
-    //   .done();
-
-
+  initList() {
     let params = {
-      page: '10'
+      token: '123456789'
     }
     Network.fetchRequest('index.php/Home/public/partlist', 'POST', params)
       .then(({ info, data, status }) => {
         if (status == '1') {
-          alert("123789")
           this.setState({ mydata0: data })
         } else {
-          alert("123789")
+          this.setState({ mydata0: null })
+        }
+      }).catch(error => {
+        ToastUtil.toastShort(Network.ErrorMessage);
+      });
+  }
+  
+  initBanner() {
+    let params = {
 
+    }
+    Network.fetchRequest('index.php/Home/Public/banner', 'POST', params)
+      .then(({ info, data, status }) => {
+        if (status == '1') {
+          this.setState({ mybanner: data })
+        } else {
+          this.setState({ mybanner: null })
         }
       }).catch(error => {
         ToastUtil.toastShort(Network.ErrorMessage);
       });
   }
 
+  componentDidMount() {
+    // setTimeout(() => {
+    //   SplashScreen.hide();
+    // }, 1000)
+    this.initList(); //初始化列表
+    this.initBanner();
+  }
 
   render() {
-    // var data = [];
-    // for (var i = 0; i < mydata.data.length; i++) {
-    //   data.push(mydata.data[i]);
-    // }
-    // for (var i = 0; i < this.state.mydata0.length; i++) {
-    //   data.push(this.state.mydata0[i]);
-    // }
-
     return (
       <View style={styles.container}>
         <StatusBar
@@ -444,8 +440,8 @@ export default class HomePage extends Component {
               horizontal={true}
               showsPagination={false}
               paginationStyle={{ bottom: 10 }}
-              showsButtons={false}>
-              <Image source={require('../images/lbt0.png')} style={styles.img} />
+              showsButtons={false}>              
+              <Image source={{ uri: this.state.mybanner.img }} style={styles.img} />
               <Image source={require('../images/lbt0.png')} style={styles.img} />
               <Image source={require('../images/lbt0.png')} style={styles.img} />
             </Swiper>
@@ -476,9 +472,9 @@ export default class HomePage extends Component {
             // onEndReached={this._onload}
             // numColumns ={3}
             // columnWrapperStyle={{borderWidth:2,borderColor:'black',paddingLeft:20}}
-            //horizontal={true}
+            // horizontal={true}
             getItemLayout={(data, index) => (
-              { length: 142, offset: 142 * index, index }
+              { length: imgH, offset: imgH * index, index }
             )}
             // data={mydata.data}
             data={this.state.mydata0}
@@ -541,11 +537,17 @@ export default class HomePage extends Component {
     );
   }
 
+  _renderBanner = (item) => {
+    return (
+      <Image source={{ uri:item.item.img }} style={styles.img} />
+
+    );
+  }
+
   _renderItem = (item) => {
-    console.log(item)
     return (
       <View style={styles.jdcell}>
-        <Image source={require('../images/jd1.png') /* {uri:item.item.photo_path} */} style={{ width: 110, height: 110 }}></Image>
+        <Image source={{ uri: item.item.photo_path }} style={{ width: 110, height: 110 }}></Image>
         <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
           <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
           <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.name}</Text>
@@ -553,7 +555,7 @@ export default class HomePage extends Component {
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
             <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.wages}</Text>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('OrderDetail')}
+              onPress={() => this.props.navigation.navigate('OrderDetail', { itemId: item.item.id })}
               style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
               <Text style={{ color: '#222224', fontWeight: 'bold' }}>立即报名</Text>
             </TouchableOpacity>

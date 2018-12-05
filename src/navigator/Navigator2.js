@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator, } from 'react-navigatio
 import Home from '../pages/Home'
 import Mine from '../pages/Mine'
 import Mine2 from '../pages/Mine2'
+import Mine3 from '../pages/Mine3'
 import OrderTaking from '../pages/OrderTaking'
 import Search from '../pages/Search'
 import OrderDetail from '../pages/OrderDetail'
@@ -25,7 +26,7 @@ class BackImg extends Component {
 const Tab = createBottomTabNavigator(
     {
         Home: Home,
-        Mine: Mine2,
+        Mine: Mine3,
     },
     {
         navigationOptions: ({ navigation }) => ({
