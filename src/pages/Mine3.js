@@ -31,9 +31,14 @@ export default class App extends Component {
             dataypj: null,
             datayjj: null,
             mydata0: [],
+            mydataybm:[],
+            mydataywc:[],
+            mydataypj:[],
+            mydatayjj:[],
             myinfo: [],
             identity: '',
-            type: ''
+            type: '',
+            
         }
     }
 
@@ -41,23 +46,35 @@ export default class App extends Component {
     initRecord() {
         let params = {
             token: '123456789',
-            type: this.state.type
+            // type: this.state.type
         }
         Network.fetchRequest('index.php/Home/Index/record', 'POST', params)
             .then(({ info, data, status }) => {
                 if (status == '1') {
-                    let arr=[];
-                    
+                    let arrybm=[];
+                    let arrywc=[];
+                    let arrypj=[];
+                    let arryjj=[];
+                    this.setState({ mydata0: data })
                     for (var i=0; i < data.length; i++) {
                         // alert(JSON.stringify(data))
-                        if (data[i].type == this.state.type) {                            
-                            arr.push(data[i]);
-                            // alert(JSON.stringify(this.state.mydata0))
-                            // this.setState({ mydata0: data })
+                        if (data[i].type == 1) {                            
+                            arrybm.push(data[i]);
+                        }
+                        if (data[i].type == 2) {                            
+                            arrywc.push(data[i]);
+                        }
+                        if (data[i].type == 3) {                            
+                            arrypj.push(data[i]);
+                        }
+                        if (data[i].type == 4) {                            
+                            arryjj.push(data[i]);
                         }
                     }
-                    this.setState({ mydata0: arr })
-
+                    this.setState({ mydataybm: arrybm })
+                    this.setState({ mydataywc: arrywc })
+                    this.setState({ mydataypj: arrypj })
+                    this.setState({ mydatayjj: arryjj })
                     // alert(JSON.stringify(this.state.mydata0))
                 } else {
                     alert("999")
@@ -88,28 +105,6 @@ export default class App extends Component {
                 // ToastUtil.toastShort(Network.ErrorMessage);
             });
     }
-
-    selectList() {
-        this.setState({ type: '', chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })
-        this.initRecord();
-    }
-    selectListybm() {
-        this.setState({ type: '1', chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })
-        this.initRecord();
-    }
-    selectListywc() {
-        this.setState({ type: '2', chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })
-        this.initRecord();
-    }
-    selectListypj() {
-        this.setState({ type: '3', chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })
-        this.initRecord();
-    }
-    selectListyjj() {
-        this.setState({ type: '4', chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })
-        this.initRecord();
-    }
-
 
     componentDidMount() {
         // setTimeout(() => {
@@ -147,20 +142,20 @@ export default class App extends Component {
                     <View style={{ backgroundColor: 'white', marginTop: 10, paddingTop: 16, }}>
                         <Text style={{ fontSize: 18, color: '#222224', paddingLeft: 16, paddingRight: 16, marginBottom: 10 }}>我的兼职</Text>
                         <View style={{ flexDirection: 'row', height: 30, justifyContent: 'space-around' }}>
-                            <Text style={this.state.all}
-                                onPress={() => this.selectList()}
+                        <Text style={this.state.all}
+                                onPress={() => this.setState({ chooseItem: styles.jdcell, all: styles.choosed, ybm: null, ywc: null, ypj: null, yjj: null, })}
                             >全部</Text>
                             <Text style={this.state.ybm}
-                                onPress={() => this.selectListybm()}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellybm, all: null, ybm: styles.choosed, ywc: null, ypj: null, yjj: null, })}
                             >已报名</Text>
                             <Text style={this.state.ywc}
-                                onPress={() => this.selectListywc()}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellywc, all: null, ybm: null, ywc: styles.choosed, ypj: null, yjj: null, })}
                             >已完成</Text>
                             <Text style={this.state.ypj}
-                                onPress={() => this.selectListypj()}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellypj, all: null, ybm: null, ywc: null, ypj: styles.choosed, yjj: null, })}
                             >已评价</Text>
                             <Text style={this.state.yjj}
-                                onPress={() => this.selectListyjj()}
+                                onPress={() => this.setState({ chooseItem: styles.jdcellyjj, all: null, ybm: null, ywc: null, ypj: null, yjj: styles.choosed, })}
                             >已拒绝</Text>
                         </View>
                     </View>
@@ -188,7 +183,13 @@ export default class App extends Component {
                 getItemLayout={(data, index) => (
                     { length: 142, offset: 142 * index, index }
                 )}
-                data={this.state.mydata0}
+                data={
+                    this.state.all != null ? this.state.mydata0 :
+                    this.state.ywc != null ? this.state.mydataywc :
+                    this.state.ybm != null ? this.state.mydataybm :
+                    this.state.ypj != null ? this.state.mydataypj :
+                    this.state.mydatayjj
+                }
             >
             </FlatList>
         );
