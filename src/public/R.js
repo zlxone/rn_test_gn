@@ -14,7 +14,7 @@ import Network from './net/Network';
 import color from './res/color';
 // import storage from './three_party/storage';
 // import storageType from './three_party/storageType';
-// import ToastUtil from './three_party/toastUtil';
+import ToastUtil from './three_party/toastUtil';
 //import ToastLoad from './three_party/toastLoad';
 import RegExp from './tools/filterRE';
 import StringUtil from './tools/stringUtil';
@@ -34,7 +34,7 @@ export {
     Network,         //网络请求工具类
     StringUtil,      //字符串处理工具类
     Adapter,         //适配处理工具类
-    // ToastUtil,       //33333 三方toast组件封装
+    ToastUtil,       //33333 三方toast组件封装
     RegExp,          //正则过滤工具类
     //ImageCopy,       //33333 三方图片选择封装
     //ToastLoad,       //33333 三方toast带动画的封装

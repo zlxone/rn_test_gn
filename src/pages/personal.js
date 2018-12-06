@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, TouchableOpacity, SplashScreen } from 'react-native';
 import R, { Network, ToastUtil } from '../public/R';
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
@@ -13,7 +13,8 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            myinfo: []
+            myinfo: [],
+            phone: ''
         }
     }
 
@@ -32,11 +33,15 @@ export default class App extends Component {
                     }
                     // alert(JSON.stringify(this.state.myinfo))
                 } else {
-                    alert("222")
+                    ToastUtil.toastShort("no")
                 }
             }).catch(error => {
-                // ToastUtil.toastShort(Network.ErrorMessage);
+                ToastUtil.toastShort(Network.ErrorMessage);
             });
+    }
+
+    callBack() {
+        this.initInfo()
     }
 
     componentDidMount() {
@@ -54,7 +59,7 @@ export default class App extends Component {
                         头像
             </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image style={{ width: 60, height: 60, marginRight: 8, borderRadius: 30 }} source={{uri : this.state.myinfo.photo_path}}></Image>
+                        <Image style={{ width: 60, height: 60, marginRight: 8, borderRadius: 30 }} source={{ uri: this.state.myinfo.photo_path }}></Image>
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
@@ -67,7 +72,6 @@ export default class App extends Component {
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
-
                 <View style={{ padding: 10, backgroundColor: 'white', marginTop: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Text>
                         年龄
@@ -95,12 +99,12 @@ export default class App extends Component {
                         <Image source={require('../images/ljt.png')}></Image>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Changetel')}>
+                <TouchableOpacity 
+                onPress={() => this.props.navigation.navigate('Changetel', 
+                { callBack:() => this.callBack() })}
+                >
                     <View style={{ padding: 10, backgroundColor: 'white', marginTop: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-
-                        <Text>
-                            更改手机号
-            </Text>
+                        <Text>更改手机号</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ marginRight: 8 }}>{this.state.myinfo.username}</Text>
                             <Image source={require('../images/ljt.png')}></Image>

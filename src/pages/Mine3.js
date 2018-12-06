@@ -11,6 +11,7 @@ export default class App extends Component {
     static navigationOptions = {
         title: '我',
     };
+    _keyExtractor = (item, index) => item.id;
     constructor(props) {
         super(props);
         this.state = {
@@ -38,6 +39,7 @@ export default class App extends Component {
             myinfo: [],
             identity: '',
             type: '',
+            refreshState: true
 
         }
     }
@@ -46,7 +48,6 @@ export default class App extends Component {
     initRecord() {
         let params = {
             token: '123456789',
-            // type: this.state.type
         }
         Network.fetchRequest('index.php/Home/Index/record', 'POST', params)
             .then(({ info, data, status }) => {
@@ -71,16 +72,20 @@ export default class App extends Component {
                             arryjj.push(data[i]);
                         }
                     }
-                    this.setState({ mydataybm: arrybm })
-                    this.setState({ mydataywc: arrywc })
-                    this.setState({ mydataypj: arrypj })
-                    this.setState({ mydatayjj: arryjj })
+                    this.setState({
+                        mydataybm: arrybm,
+                        mydataywc: arrywc,
+                        mydataypj: arrypj,
+                        mydatayjj: arryjj,
+                        refreshState: false
+                    })
+
                     // alert(JSON.stringify(this.state.mydata0))
                 } else {
                     alert("999")
                 }
             }).catch(error => {
-                // ToastUtil.toastShort(Network.ErrorMessage);
+                ToastUtil.toastShort(Network.ErrorMessage);
             });
     }
 
@@ -168,13 +173,14 @@ export default class App extends Component {
     _renderList = () => {
         return (
             <FlatList
+                keyExtractor={this._keyExtractor}
                 ref={(flatList) => this._flatList = flatList}
                 // ListHeaderComponent={this._header}
                 // ListFooterComponent={this._footer}
                 ItemSeparatorComponent={this._separator}
                 renderItem={this._renderItem}
-                // onRefresh={this.refreshing}
-                refreshing={false}
+                onRefresh={this._refreshing}
+                refreshing={this.state.refreshState}
                 onEndReachedThreshold={0}
                 // onEndReached={this._onload}
                 // numColumns ={3}
@@ -199,7 +205,7 @@ export default class App extends Component {
     _renderItem = (item) => {
         return (
             <View style={styles.jdcell}>
-                <Image source={require('../images/jd1.png') /* {uri:item.item.photo_path} */} style={{ width: 110, height: 110 }}></Image>
+                <Image source={{ uri: item.item.photo_path }} style={{ width: 110, height: 110 }}></Image>
                 <View style={{ width: width - 140, justifyContent: 'center', paddingLeft: 15 }}>
                     <Text style={{ fontSize: 16, marginBottom: 6, color: '#222224' }}>{item.item.title}</Text>
                     <Text style={{ color: '#ADAFB4', fontSize: 12, marginBottom: 6 }}>{item.item.name}</Text>
@@ -227,6 +233,12 @@ export default class App extends Component {
                 </View>
             </View>
         )
+    }
+
+    _refreshing = () => {
+        this.setState({ refreshState: true })
+        this.initRecord()
+        alert("ok")
     }
 }
 

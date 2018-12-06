@@ -48,6 +48,7 @@ export default class HomePage extends Component {
   static navigationOptions = {
     title: '兼职大厅',
   };
+  _keyExtractor = (item, index) => item.id;
   constructor(props) {
     super(props);
     this.state = {
@@ -77,7 +78,10 @@ export default class HomePage extends Component {
       demand: true, //true为是  false为否
       sex: true, //true为男  false为女
       mydata0: [],
-      mybanner: []
+      mybanner: [],
+      refreshState: true,
+      page: '1'
+      // content:this.props.navigation.getParam('content', '')
     }
   }
 
@@ -362,20 +366,23 @@ export default class HomePage extends Component {
 
   initList() {
     let params = {
-      token: '123456789'
+      page: this.state.page,
+      token: '123456789',
+      // search: //this.state.content
     }
     Network.fetchRequest('index.php/Home/public/partlist', 'POST', params)
       .then(({ info, data, status }) => {
         if (status == '1') {
-          this.setState({ mydata0: data })
+          this.setState({ mydata0: data, refreshState: false })
+
         } else {
-          this.setState({ mydata0: null })
+          this.setState({ mydata0: null, refreshState: false })
         }
       }).catch(error => {
         ToastUtil.toastShort(Network.ErrorMessage);
       });
   }
-  
+
   initBanner() {
     let params = {
 
@@ -440,7 +447,7 @@ export default class HomePage extends Component {
               horizontal={true}
               showsPagination={false}
               paginationStyle={{ bottom: 10 }}
-              showsButtons={false}>              
+              showsButtons={false}>
               <Image source={{ uri: this.state.mybanner.img }} style={styles.img} />
               <Image source={require('../images/lbt0.png')} style={styles.img} />
               <Image source={require('../images/lbt0.png')} style={styles.img} />
@@ -461,15 +468,16 @@ export default class HomePage extends Component {
           </View>
 
           <FlatList
+            keyExtractor={this._keyExtractor}
             ref={(flatList) => this._flatList = flatList}
             // ListHeaderComponent={this._header}
             // ListFooterComponent={this._footer}
             ItemSeparatorComponent={this._separator}
             renderItem={this._renderItem}
-            // onRefresh={this.refreshing}
-            refreshing={false}
+            onRefresh={this._refreshing}
+            refreshing={this.state.refreshState}
             onEndReachedThreshold={0}
-            // onEndReached={this._onload}
+            onEndReached={this._loadMore}
             // numColumns ={3}
             // columnWrapperStyle={{borderWidth:2,borderColor:'black',paddingLeft:20}}
             // horizontal={true}
@@ -489,7 +497,7 @@ export default class HomePage extends Component {
           onRequestClose={() => this.setState({ showModal: false })}
         >
           <ScrollView>
-            <View style={{ backgroundColor: 'rgba(0,0,0,.6)', flex: 1, flexDirection: 'row' }}>
+            <View style={{ backgroundColor: 'rgba(0,0,0,.6)', flex: 1, flexDirection: 'row', height: height }}>
               <TouchableOpacity style={{ backgroundColor: 'transparent' }} activeOpacity={1} onPress={() => { this.setState({ showModal: false }) }}>
                 <View style={{ width: shadowWidth, height: '100%', backgroundColor: 'transparent', }} />
               </TouchableOpacity>
@@ -539,8 +547,7 @@ export default class HomePage extends Component {
 
   _renderBanner = (item) => {
     return (
-      <Image source={{ uri:item.item.img }} style={styles.img} />
-
+      <Image source={{ uri: item.item.img }} style={styles.img} />
     );
   }
 
@@ -555,7 +562,7 @@ export default class HomePage extends Component {
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
             <Text style={{ color: '#B92424', fontWeight: 'bold', fontSize: 18 }}>{item.item.wages}</Text>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('OrderDetail', { itemId: item.item.id })}
+              onPress={() => this.props.navigation.navigate('OrderDetail', { itemId: item.item.id, token: '123456789' })}
               style={{ backgroundColor: 'white', padding: 4, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'gray', borderRadius: 2 }}>
               <Text style={{ color: '#222224', fontWeight: 'bold' }}>立即报名</Text>
             </TouchableOpacity>
@@ -567,6 +574,16 @@ export default class HomePage extends Component {
 
   _separator = () => {
     return <View style={{ height: 1, backgroundColor: '#EAEAEA' }} />;
+  }
+
+  _refreshing = () => {
+    this.setState({ refreshState: true })
+    this.initList()
+  }
+
+  _loadMore = () => {
+    this.setState({ page: this.state.page++ })
+    ToastUtil.toastShort('more ' + this.state.page)
   }
 
 }

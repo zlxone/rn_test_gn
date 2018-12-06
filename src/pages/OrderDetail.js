@@ -21,30 +21,51 @@ export default class App extends Component {
 
     this.state = {
       mydata0: [],
-      itemId: navigation.getParam('itemId', '-1')
-
+      itemId: navigation.getParam('itemId', '-1'),
+      token: navigation.getParam('token', '-1')
     }
   }
 
   _tj() {
-    if (1 == 1) {
-      fetch('index.php/Home/Public/partdetails', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "token=123456789"
-      })
-        .then((response) => response.json())
-        .then(({ info, data, status }) => {       // 获取到的数据处理
-          this.setState({ mydata0: data })
-        })
-        .catch((error) => { // 错误处理
-        })
-        .done();
-    } else {
-      Alert.alert('', '您的资料不完善，请先完善资料', [{ text: 'OK', onPress: () => console.log('OK Pressed') },], { cancelable: false })
+    this.initInfo();
+
+    let params = {
+      token: '123456789',
+      id: this.state.itemId
     }
+    Network.fetchRequest('index.php/Home/Index/signup', 'POST', params)
+      .then(({ info, data, status }) => {
+        alert("ok")
+        // if (status == '1') {
+        //   alert("ok")
+        // } else {
+        //   alert("error")
+        // }
+      }).catch(error => {
+        // ToastUtil.toastShort(Network.ErrorMessage);
+      });
+  }
+
+  initInfo() {
+    let params = {
+      token: '123456789'
+    }
+    Network.fetchRequest('index.php/Home/index/index', 'POST', params)
+      .then(({ info, data, status }) => {
+        if (status == '1') {
+          if (data.real_name == '' || data.school == '' || data.sex == '' || data.ages == '' || data.identity == '') {
+            Alert.alert('', '您的资料不完善，请先完善资料', [{ text: 'OK', onPress: () => console.log('OK Pressed') },], { cancelable: false })
+            return;
+          }
+
+          // alert(JSON.stringify(this.state.myinfo))
+        } else {
+          Alert.alert('', '您的资料不完善，请先完善资料', [{ text: 'OK', onPress: () => console.log('OK Pressed') },], { cancelable: false })
+          return;
+        }
+      }).catch(error => {
+        // ToastUtil.toastShort(Network.ErrorMessage);
+      });
   }
 
   initDetail() {
@@ -65,7 +86,6 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // this.state.itemId = this.props.getParam('itemId', '-1');
     this.initDetail();
   }
 

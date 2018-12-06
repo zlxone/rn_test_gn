@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, TextInput, TouchableOpacity,FlatList } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import R, { Network, ToastUtil } from '../public/R';
 
 var Dimensions = require('Dimensions');
@@ -14,8 +14,12 @@ export default class App extends Component {
     super(props);
     this.state = {
       mydata0: [],
-      content:''
+      content: ''
     }
+  }
+
+  componentDidMount() {
+    this.initList()
   }
 
   initList() {
@@ -26,23 +30,19 @@ export default class App extends Component {
       .then(({ info, data, status }) => {
         if (status == '1') {
           this.setState({ mydata0: data })
-          // alert(this.state.mydata0[1].conten)
-
+          // console.log('list ' + data)
         } else {
           this.setState({ mydata0: null })
         }
       }).catch(error => {
-        // ToastUtil.toastShort(Network.ErrorMessage);
+        ToastUtil.toastShort(Network.ErrorMessage);
       });
   }
 
-  componentDidMount() {
-    // setTimeout(() => {
-    //   SplashScreen.hide();
-    // }, 1000)
-
-    this.initList(); //初始化列表
-
+  search() {
+    // this.props.navigation.state.params.callback("search");
+    // this.props.navigation.goBack();
+    this.props.navigation.navigate('OrderTaking', { content: this.state.content });
   }
 
   render() {
@@ -53,8 +53,9 @@ export default class App extends Component {
             source={require("../images/nav_but_icon_.png")}></Image>
           <TextInput
             placeholder='请输入搜索内容'
-            value ={this.state.content}
+            value={this.state.content}
             onChangeText={(newText) => this.setState({ content: newText })}
+            onBlur={() => this.search()}
             style={{ height: 40, width: '100%', }}
           ></TextInput>
         </View>
@@ -83,7 +84,7 @@ export default class App extends Component {
               data={this.state.mydata0}
             >
             </FlatList>
-            
+
           </View>
         </View>
       </View>
@@ -93,7 +94,7 @@ export default class App extends Component {
   _renderItem = (item) => {
     return (
       <TouchableOpacity>
-        <Text style={styles.rmtext} onPress={() => this.setState({ content: '123' })}>{item.item.conten}</Text>
+        <Text style={styles.rmtext} onPress={() => this.setState({ content: item.item.conten })}>{item.item.conten}</Text>
       </TouchableOpacity>
     );
   }
